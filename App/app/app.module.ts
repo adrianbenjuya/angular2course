@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule, routedComponents } from './app-routing.module';
 import { HeroService } from './hero.service';
 import { HeroSearchComponent } from './hero-search.component';
+import { LoadingComponent } from './loading.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { HeroSearchComponent } from './hero-search.component';
   declarations: [
     AppComponent,
     HeroSearchComponent,
-    routedComponents
+    routedComponents,
+    LoadingComponent
   ],
   providers: [
     HeroService

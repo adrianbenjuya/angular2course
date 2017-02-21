@@ -8,6 +8,9 @@ import { Hero } from './hero';
 @Injectable()
 export class HeroService {
   private heroesUrl = 'app/heroes';  // URL to web api
+  private jsonHeader = new Headers({
+      'Content-Type': 'application/json'
+    });
 
   constructor(private http: Http) { }
 
@@ -33,24 +36,19 @@ export class HeroService {
   }
 
   delete(heroId: number): Observable<Response> {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
     let url = `${AppConfig.HEROES_URL}${heroId}`;
 
     return this.http
-      .delete(url, {headers: headers})
+      .delete(url, {headers: this.jsonHeader})
       .catch(this.handleError);
   }
 
   // Add new Hero
   private post(hero: Hero): Promise<Hero> {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
 
     return this.http
-      .post(this.heroesUrl, JSON.stringify(hero), { headers: headers })
+      .post(this.heroesUrl, JSON.stringify(hero), { headers: this.jsonHeader })
       .toPromise()
       .then(res => res.json().data)
       .catch(this.handleError);
@@ -58,13 +56,11 @@ export class HeroService {
 
   // Update existing Hero
   private put(hero: Hero): Promise<Hero> {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
     let url = `${this.heroesUrl}/${hero.id}`;
 
     return this.http
-      .put(url, JSON.stringify(hero), { headers: headers })
+      .put(url, JSON.stringify(hero), { headers: this.jsonHeader })
       .toPromise()
       .then(() => hero)
       .catch(this.handleError);
