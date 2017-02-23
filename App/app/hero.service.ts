@@ -10,7 +10,7 @@ export class HeroService {
   private heroesUrl = 'app/heroes';  // URL to web api
   private jsonHeader = new Headers({
       'Content-Type': 'application/json'
-    });
+  });
 
   constructor(private http: Http) { }
 
@@ -23,7 +23,7 @@ export class HeroService {
   }
 
   getHero(id: number): Observable<Hero> {
-    return this.http.get(AppConfig.HEROES_URL + id)
+    return this.http.get(`${AppConfig.HEROES_URL}get/${id}`)
       .map(response => response.json())
       .map(response => Hero.fromJson(response));
   }

@@ -13,12 +13,7 @@ namespace TourOfHeroes {
         protected void Application_Start() {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings
-            .Add(new RequestHeaderMapping("Accept",
-                                          "text/html",
-                                          StringComparison.InvariantCultureIgnoreCase,
-                                          true,
-                                          "application/json"));
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
