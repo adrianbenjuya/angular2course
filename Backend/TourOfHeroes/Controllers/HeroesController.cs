@@ -1,10 +1,13 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TourOfHeroes.Models;
+using TourOfHeroes.Models.Api;
 
 namespace TourOfHeroes.Controllers
 {
@@ -13,13 +16,18 @@ namespace TourOfHeroes.Controllers
         private Context db = new Context();
 
         // GET: api/Heroes
-        public IQueryable<Hero> GetHeroes()
+        public ICollection<HeroDTO> GetHeroes()
         {
-            return db.Heroes;
+            var heroes = new List<HeroDTO>();
+            foreach (var hero in db.Heroes)
+            {
+                heroes.Add(DTOFactory(hero));
+            }
+            return heroes;
         }
 
         // GET: api/Heroes/5
-        [ResponseType(typeof(Hero))]
+        [ResponseType(typeof(Hero)), ActionName("Get")]
         public IHttpActionResult GetHero(int id)
         {
             Hero hero = db.Heroes.Find(id);
@@ -28,7 +36,7 @@ namespace TourOfHeroes.Controllers
                 return NotFound();
             }
 
-            return Ok(hero);
+            return Ok(DTOFactory(hero));
         }
 
         // PUT: api/Heroes/5
@@ -95,6 +103,45 @@ namespace TourOfHeroes.Controllers
             db.SaveChanges();
 
             return Ok(hero);
+        }
+
+        [ActionName("Vote")]
+        public IHttpActionResult GetVote(int id)
+        {
+            Hero hero = db.Heroes.Find(id);
+            if (hero == null)
+            {
+                return NotFound();
+            }
+
+            var ip = HttpContext.Current.Request.UserHostAddress;
+            var vote = new HeroVote
+            {
+                Hero = hero,
+                IPVote = ip,
+            };
+
+            db.Votes.Add(vote);
+            db.SaveChanges();
+
+            return Ok(new { votes = db.Votes.Where(v => v.HeroId == id).Count() });
+        }
+
+        private HeroDTO DTOFactory(Hero hero)
+        {
+            var ip = HttpContext.Current.Request.UserHostAddress;
+            var votes = db.Votes.Where(v => v.HeroId == hero.Id);
+
+            var dto = new HeroDTO
+            {
+                Id = hero.Id,
+                Name = hero.Name,
+                Image = hero.Image,
+                Votes = votes.Count(),
+                AlreadyVoted = votes.FirstOrDefault(v => v.IPVote == ip) != null
+            };
+
+            return dto;
         }
 
         protected override void Dispose(bool disposing)
