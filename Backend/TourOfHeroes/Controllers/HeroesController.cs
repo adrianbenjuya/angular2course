@@ -71,7 +71,7 @@ namespace TourOfHeroes.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(hero);
         }
 
         // POST: api/Heroes
