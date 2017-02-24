@@ -1,0 +1,72 @@
+[
+    {
+        "Id": 1,
+        "Name": "Spiderman",
+        "Image": "http://images2.memedroid.com/images/UPLOADED71/5378fa40167a1.jpeg",
+        "Votes": 3,
+        "AlreadyVoted": false
+    },
+    {
+        "Id": 2,
+        "Name": "Luke Skywalker",
+        "Image": "http://www.actuall.com/wp-content/uploads/2016/09/luke-skywalker.jpg",
+        "Votes": 0,
+        "AlreadyVoted": false
+    },
+    {
+        "Id": 3,
+        "Name": "Chuck Norris",
+        "Image": "https://neliosoftware.com/es/wp-content/uploads/sites/3/2014/02/chuck-norris.jpg",
+        "Votes": 2,
+        "AlreadyVoted": true
+    },
+    {
+        "Id": 4,
+        "Name": "Superman",
+        "Image": "http://image.vanguardia.com.mx/sites/default/files/superman-3d-art.jpg",
+        "Votes": 5,
+        "AlreadyVoted": true
+    },
+    {
+        "Id": 5,
+        "Name": "Iron man",
+        "Image": "https://s-media-cache-ak0.pinimg.com/736x/2c/bb/04/2cbb04e7ef9266e1e57a9b0e75bc555f.jpg",
+        "Votes": 1,
+        "AlreadyVoted": false
+    },
+    {
+        "Id": 6,
+        "Name": "Batman",
+        "Image": "https://static-latercera-qa.s3.amazonaws.com/wp-content/uploads/sites/7/20150429/2108594.jpg",
+        "Votes": 10,
+        "AlreadyVoted": true
+    },
+    {
+        "Id": 7,
+        "Name": "Wonder woman",
+        "Image": "http://www.hobbyconsolas.com/sites/hobbyconsolas.com/public/media/image/2016/12/wonder-woman.jpg",
+        "Votes": 6,
+        "AlreadyVoted": false
+    },
+    {
+        "Id": 8,
+        "Name": "Aquaman",
+        "Image": "https://s-media-cache-ak0.pinimg.com/736x/f1/f3/0e/f1f30e27fb66a3283e9c6b7fe79f2326.jpg",
+        "Votes": 0,
+        "AlreadyVoted": false
+    },
+    {
+        "Id": 9,
+        "Name": "Juan Román Riquelme",
+        "Image": "http://christianmanzanelli.com/wp-content/uploads/2015/02/juan_roman_riquelme_christian_manzanelli_representante_artistico_contratar_sitio_oficial_juan_roman_riquelme-8.jpg",
+        "Votes": 20,
+        "AlreadyVoted": true
+    },
+    {
+        "Id": 10,
+        "Name": "El hombre hormiga",
+        "Image": "http://www.eatyourcomics.com/wp-content/uploads/2015/05/AntMan_Poster_Cover_600x592-600x592.jpg",
+        "Votes": 1,
+        "AlreadyVoted": true
+    }
+]

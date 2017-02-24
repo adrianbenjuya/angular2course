@@ -1,0 +1,13 @@
+<div *ngIf="hero">
+  <h2>{{hero.name}} details!</h2>
+  <div>
+    <label>id: </label>{{hero.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="hero.name" placeholder="name" />
+    <img *ngIf="hero.image && hero.image.length" src="{{hero.image}}" />
+    {{hero.votes}}<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>

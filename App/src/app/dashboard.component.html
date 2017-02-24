@@ -1,0 +1,10 @@
+<h3>Top Heroes</h3>
+<div class="grid grid-pad">
+  <loading *ngIf="!heroes"></loading>
+  <div *ngFor="let hero of heroes; let first = first; let last = last" (click)="gotoDetail(hero)" class="col-1-4">
+    <div class="module hero" [ngClass]="{gold: first, silver: !first && !last, bronze: last}">
+      <h4>{{hero.name}} {{hero.votes}}<i class="fa fa-thumbs-up" aria-hidden="true"></i></h4>
+    </div>
+  </div>
+</div>
+<hero-search></hero-search>
