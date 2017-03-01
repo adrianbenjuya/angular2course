@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { HeroSearchService } from './hero-search.service';
-import { Hero } from './hero';
+import { HeroSearchService } from '../hero-search.service';
+import { Hero } from '../models/hero';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';

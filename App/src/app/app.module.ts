@@ -6,9 +6,10 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule, routedComponents } from './app-routing.module';
 import { HeroService } from './hero.service';
-import { HeroSearchComponent } from './hero-search.component';
-import { LoadingComponent } from './loading.component';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { LoadingComponent } from './loading/loading.component';
 import { HeroSearchService } from './hero-search.service';
+import { HeroPopupComponent } from './hero-popup/hero-popup.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { HeroSearchService } from './hero-search.service';
     AppComponent,
     HeroSearchComponent,
     routedComponents,
-    LoadingComponent
+    LoadingComponent,
+    HeroPopupComponent
   ],
   providers: [
     HeroService,
