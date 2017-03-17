@@ -2,8 +2,8 @@ export class Hero {
     id: number;
     name: string;
     image: string;
-    votes: number;
-    alreadyVoted: boolean;
+    votes: number = 0;
+    alreadyVoted: boolean = false;
 
     public static fromJsonArray(json: any): Hero[] {
         let heroes: Hero[] = new Array<Hero>();
