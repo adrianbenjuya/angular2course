@@ -27,13 +27,13 @@ h3 {
 	padding: 20px;
 	text-align: center;
 	color: #eee;
+  background-color: #CCC;
 }
 h4 {
   position: relative;
 }
 .thumbnail:hover {
   background-color: #EEE;
-  background-color: #CCC;
   cursor: pointer;
   color: #607d8b;
 }
