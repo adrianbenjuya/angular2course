@@ -3,6 +3,7 @@ export class Hero {
     name: string;
     image: string;
     votes: number = 0;
+    description: string;
     alreadyVoted: boolean = false;
 
     public static fromJsonArray(json: any): Hero[] {

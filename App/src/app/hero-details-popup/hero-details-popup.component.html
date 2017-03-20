@@ -1,0 +1,37 @@
+<!-- Enfoque 1 -->
+<div *ngIf="_show" id="overlay"></div>
+<div *ngIf="_show" class="modal fade in" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="close()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{_hero.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{_hero.description}}</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="close()" type="button" class="btn btn-default">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Enfoque 2 -->
+<!--<div *ngIf="show" id="overlay"></div>
+<div *ngIf="show" class="modal fade in" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="close()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{hero.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{hero.description}}</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="close()" type="button" class="btn btn-default">Close</button>
+      </div>
+    </div>
+  </div>
+</div>-->

@@ -10,6 +10,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HeroSearchService } from './hero-search.service';
 import { HeroPopupComponent } from './hero-popup/hero-popup.component';
+import { HeroDetailsPopupComponent } from './hero-details-popup/hero-details-popup.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { HeroPopupComponent } from './hero-popup/hero-popup.component';
     HeroSearchComponent,
     routedComponents,
     LoadingComponent,
-    HeroPopupComponent
+    HeroPopupComponent,
+    HeroDetailsPopupComponent
   ],
   providers: [
     HeroService,
