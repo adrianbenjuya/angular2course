@@ -1,13 +1,46 @@
+<loading *ngIf="!hero && !error"></loading>
+<div *ngIf="error" class="alert alert-danger" role="alert">{{error}}</div>
 <div *ngIf="hero">
-  <h2>{{hero.name}} details!</h2>
-  <div>
-    <label>id: </label>{{hero.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name" />
-    <img *ngIf="hero.image && hero.image.length" src="{{hero.image}}" />
-    {{hero.votes}}<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{hero.name}} details!</h2>
+      <form class="form-horizontal col-md-6">
+        <div class="form-group">
+          <label class="control-label col-md-2" for="id">ID:</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" id="id" readonly [ngModel]="hero.id" name="id" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="name">Name:</label>
+          <div class="col-md-10">
+            <input #heroNameInput type="text" class="form-control" id="name" placeholder="Name" [(ngModel)]="hero.name" name="name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="description">Description:</label>
+          <div class="col-md-10">
+            <textarea class="form-control" id="description" placeholder="Description" [(ngModel)]="hero.description" name="description"></textarea>
+          </div>
+        </div>
+        <img class="thumbnail img-responsive" src="{{hero.image}}" (error)="$event.target.src = './assets/no_hero_img.jpg'" />
+        <button *ngIf="resetImg" class="btn btn-default" (click)="replaceImage(true)">Reset</button>
+        <div class="form-group">
+          <label class="control-label col-md-2" for="image">Image:</label>
+          <div class="input-group col-md-10">
+            <input type="text" class="form-control" id="image" placeholder="Image URL" [(ngModel)]="tempImg" name="image" />
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button" (click)="replaceImage()">Apply!</button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="button" class="btn btn-default" (click)="location.back()">Back</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+      </div>
+    </div>
   </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
 </div>

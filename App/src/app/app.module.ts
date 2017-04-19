@@ -7,10 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule, routedComponents } from './app-routing.module';
 import { HeroService } from './hero.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
-import { LoadingComponent } from './loading/loading.component';
 import { HeroSearchService } from './hero-search.service';
-import { HeroPopupComponent } from './hero-popup/hero-popup.component';
-import { HeroDetailsPopupComponent } from './hero-details-popup/hero-details-popup.component';
 
 @NgModule({
   imports: [
@@ -22,10 +19,7 @@ import { HeroDetailsPopupComponent } from './hero-details-popup/hero-details-pop
   declarations: [
     AppComponent,
     HeroSearchComponent,
-    routedComponents,
-    LoadingComponent,
-    HeroPopupComponent,
-    HeroDetailsPopupComponent
+    routedComponents
   ],
   providers: [
     HeroService,

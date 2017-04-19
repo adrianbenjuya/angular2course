@@ -1,3 +1,4 @@
+<!-- Ejercicio 11 -->
 <hero-details-popup [hero]="selectedHero" (onClose)="selectedHero = null"></hero-details-popup>
 
 <div class="row">
@@ -16,7 +17,7 @@
     <!--<input type="text" [(ngModel)]="hero.name" />-->
 
     <!-- Ejercicio 5 -->
-    <input type="text" [ngModel]="heroName" (ngModelChange)="heroName = $event" />
+    <!--<input type="text" [ngModel]="heroName" (ngModelChange)="heroName = $event" />-->
 
     <!-- Ejercicio 3 -->
     <!--<i class="glyphicon glyphicon-thumbs-down" (click)="hero.votes = hero.votes - 1"></i>
@@ -35,9 +36,9 @@
     <!--<i class="glyphicon glyphicon-thumbs-up" *ngIf="hero.votes < 10" (click)="updateVotes(1)"></i>-->
 
     <!-- Ejercicio 8 -->
-    <input type="checkbox" [(ngModel)]="allowVotes" /><label>Allow votes?</label>
+    <!--<input type="checkbox" [(ngModel)]="allowVotes" /><label>Allow votes?</label>
     <i class="glyphicon glyphicon-thumbs-down" *ngIf="allowVotes && hero.votes" (click)="updateVotes(-1)"></i>
-    <i class="glyphicon glyphicon-thumbs-up" *ngIf="allowVotes && hero.votes < 10" (click)="updateVotes(1)"></i>
+    <i class="glyphicon glyphicon-thumbs-up" *ngIf="allowVotes && hero.votes < 10" (click)="updateVotes(1)"></i>-->
 
   </div>
 
@@ -62,7 +63,7 @@
   </div>-->
 
   <!-- Ejercicio 12 -->
-  <div class="col-md-12">
+  <!--<div class="col-md-12">
     <div *ngFor="let hero of heroes; let first = first; let last = last" 
          class="col-md-4"
          (click)="selectedHero = hero">
@@ -70,8 +71,36 @@
             <h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
          </div>
     </div>
-  </div>
+  </div>-->
 
-  <!--<hero-search></hero-search>-->
+  <!-- Ejercicio 14 -->
+  <!--<loading *ngIf="!heroes"></loading>
+  <div *ngIf="heroes" class="col-md-12">
+    <div *ngFor="let hero of heroes; let first = first; let last = last" 
+        class="col-md-4">
+        <div [ngClass]="{'thumbnail': true, 'gold': first, 'silver': !first && !last, 'bronze': last}">
+            <h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
+        </div>
+    </div>
+  </div>-->
+
+  <!-- Ejercicio 15 -->
+  <loading *ngIf="!heroes"></loading>
+  <div *ngIf="heroes" class="col-md-12">
+    <!-- Enfoque 1 -->
+    <!--<div *ngFor="let hero of heroes; let first = first; let last = last"
+         class="col-md-4"
+         (click)="gotoDetail(hero)">-->
+    <!-- Enfoque 2.a -->
+    <div *ngFor="let hero of heroes; let first = first; let last = last"
+         class="col-md-4" [routerLink]="['/detail', hero.id]">
+    <!-- Enfoque 2.b -->
+      <!--<div *ngFor="let hero of heroes; let first = first; let last = last"
+         class="col-md-4" [routerLink]="['/detail', { id: hero.id }]">-->
+         <div [ngClass]="{'thumbnail': true, 'gold': first, 'silver': !first && !last, 'bronze': last}">
+            <h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
+         </div>
+      </div>
+    </div>
 
 </div>

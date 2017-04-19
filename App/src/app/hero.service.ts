@@ -27,22 +27,22 @@ export class HeroService {
             .map(r => Hero.fromJsonArray(r.json()).filter(h => h.id === id)[0]);
         }
         else {
-            return this.http.get(`${AppConfig.HEROES_URL}get/${id}`)
+            return this.http.get(AppConfig.HEROES_URL + 'get/' + id)
                 .map(response => response.json())
                 .map(response => Hero.fromJson(response));
         }
     }
 
-    save(hero: Hero): Observable<Hero> {
+    save(hero: Hero): Observable<any> {
         if (hero.id) {
-            //return this.put(hero);
+            return this.put(hero);
         }
         return this.post(hero);
     }
 
     delete(heroId: number): Observable<Response> {
 
-        let url = `${AppConfig.HEROES_URL}${heroId}`;
+        let url = AppConfig.HEROES_URL + heroId;
 
         return this.http
             .delete(url, { headers: this.jsonHeader })
@@ -53,19 +53,23 @@ export class HeroService {
     private post(hero: Hero): Observable<Hero> {
 
         return this.http
-            .post(this.heroesUrl, JSON.stringify(hero), { headers: this.jsonHeader })
+            .post(AppConfig.HEROES_URL, JSON.stringify(hero), { headers: this.jsonHeader })
             .catch(this.handleError);
     }
 
     // Update existing Hero
     private put(hero: Hero): Observable<boolean> {
 
-        let url = `${this.heroesUrl}/${hero.id}`;
+        let url = AppConfig.HEROES_URL + hero.id;
 
         return this.http
             .put(url, JSON.stringify(hero), { headers: this.jsonHeader })
-            .map(r => r.ok)
             .catch(this.handleError);
+    }
+
+    vote(heroId: number): Observable<any> {
+        let url: string = AppConfig.HEROES_URL + 'vote/' + heroId;
+        return this.http.get(url).catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

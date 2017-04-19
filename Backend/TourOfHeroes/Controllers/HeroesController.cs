@@ -136,6 +136,7 @@ namespace TourOfHeroes.Controllers
             {
                 Id = hero.Id,
                 Name = hero.Name,
+                Description = hero.Description,
                 Image = hero.Image,
                 Votes = votes.Count(),
                 AlreadyVoted = votes.FirstOrDefault(v => v.IPVote == ip) != null

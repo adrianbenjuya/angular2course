@@ -40,8 +40,9 @@ export class HeroesComponent implements OnInit {
     this.heroService
       .delete(hero.id)
       .subscribe(res => {
-        this.heroes = this.heroes.filter(h => h !== hero);
-        if (this.selectedHero === hero) { this.selectedHero = null; }
+        this.getHeroes();
+        //this.heroes = this.heroes.filter(h => h !== hero);
+        //if (this.selectedHero === hero) { this.selectedHero = null; }
       }, error => this.error = error);
   }
 
@@ -56,5 +57,14 @@ export class HeroesComponent implements OnInit {
 
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedHero.id]);
+  }
+
+  vote(hero: Hero): void {
+    hero.votes++;
+    hero.alreadyVoted = true;
+    this.heroService.vote(hero.id)
+    .subscribe(
+      (response: any) => this.getHeroes()
+    );
   }
 }

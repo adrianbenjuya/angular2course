@@ -12,6 +12,7 @@ export class Hero {
           let hero: Hero = new Hero();
           hero.id = item.Id;
           hero.name = item.Name;
+          hero.description = item.Description;
           hero.image = item.Image;
           hero.votes = item.Votes;
           hero.alreadyVoted = item.AlreadyVoted;

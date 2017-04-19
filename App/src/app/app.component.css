@@ -1,16 +1,5 @@
-* {
+/** {
   font-family: Arial, Helvetica, sans-serif;
-}
-h1 {
-  font-size: 1.2em;
-  color: #999;
-  color: #555;
-  margin-bottom: 0;
-}
-h2 {
-  font-size: 2em;
-  margin-top: 0;
-  padding-top: 0;
 }
 nav a {
   padding: 5px 10px;
@@ -29,7 +18,7 @@ nav a:hover {
 }
 nav a.router-link-active {
   color: #039be5;
-}
+}*/
 .header-bar {
   background-color: rgb(0,120,215);
   height: 4px;
