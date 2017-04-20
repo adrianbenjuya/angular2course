@@ -1,29 +1,52 @@
 <div class="row">
   <div class="col-md-12">
+
     <loading *ngIf="!heroes"></loading>
-    <table class="table table-hover">
-      <tr *ngFor="let hero of heroes">
-        <td>#{{hero.id}}</td>
-        <td><a [routerLink]="['/detail', hero.id]">{{hero.name}}</a></td>
-        <td>
-          <span>{{hero.votes}}</span>
-          <button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
-        </td>
-        <td><button type="button" class="pull-right btn btn-danger" (click)="deleteHero(hero, $event)">Delete</button></td>
-      </tr>
-    </table>
+
+    <div *ngIf="heroes" class="row">
+      <div class="col-md-12 form-horizontal">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="control-label col-md-2" for="search">Search:</label>
+            <div class="col-md-10">
+              <input type="text" class="form-control" id="search" (input)="search($event.target.value)" />
+            </div>
+          </div>
+          <div class="col-md-8">
+            <button routerLink="../create" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button>
+            <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + offset >= heroService.heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            <button (click)="previousPage()" type="button" class="btn btn-secondary pull-right" [disabled]="!start"><span class="glyphicon glyphicon-chevron-left"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="heroes" class="row">
+      <div class="col-md-12">
+        <table class="table table-hover">
+
+          <thead>
+            <tr><th>#ID</th><th>Name</th><th>Votes</th><th>Actions</th></tr>
+          </thead>
+
+          <tbody>
+            <!-- Enfoque 1 -->
+            <tr *ngFor="let hero of heroes">
+
+            <!-- Enfoque 2 -->
+            <!-- <tr *ngFor="let hero of heroes | async"> -->
+
+              <td>#{{hero.id}}</td>
+              <td><a [routerLink]="['/detail', hero.id]">{{hero.name}}</a></td>
+              <td>
+                <span>{{hero.votes}}</span>
+                <button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+              </td>
+              <td><button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
-
-<!--<div class="error" *ngIf="error">{{error}}</div>
-<button (click)="addHero()">Add New Hero</button>
-<div *ngIf="addingHero">
-  <my-hero-detail></my-hero-detail>
-</div>
-
-<div *ngIf="selectedHero">
-  <h2>
-    {{selectedHero.name | uppercase}} is my hero
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>-->

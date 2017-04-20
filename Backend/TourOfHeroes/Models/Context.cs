@@ -21,7 +21,7 @@ namespace TourOfHeroes.Models
             Database.SetInitializer(new HerosDbInitializer<Context>());
         }
 
-        private class HerosDbInitializer<T> : DropCreateDatabaseAlways<Context>
+        private class HerosDbInitializer<T> : DropCreateDatabaseIfModelChanges<Context>
         {
             protected override void Seed(Context context)
             {

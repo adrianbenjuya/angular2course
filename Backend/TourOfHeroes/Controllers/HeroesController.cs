@@ -16,14 +16,16 @@ namespace TourOfHeroes.Controllers
         private Context db = new Context();
 
         // GET: api/Heroes
-        public ICollection<HeroDTO> GetHeroes()
+        public IHttpActionResult GetHeroes(int? start = null, int? offset = null)
         {
             var heroes = new List<HeroDTO>();
-            foreach (var hero in db.Heroes)
+            var heroesDb = db.Heroes.OrderBy(h => h.Id).Skip(start ?? 0).Take(offset ?? db.Heroes.Count());
+            foreach (var hero in heroesDb)
             {
                 heroes.Add(DTOFactory(hero));
             }
-            return heroes;
+
+            return Ok(new { data = heroes, total = db.Heroes.Count() });
         }
 
         // GET: api/Heroes/5

@@ -28,6 +28,11 @@ const routes: Routes = [
   },
 
   {
+    path: 'create',
+    component: HeroDetailComponent
+  },
+
+  {
     path: 'heroes',
     component: HeroesComponent
   }

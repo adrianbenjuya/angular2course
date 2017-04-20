@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Hero } from '../models/hero';
 import { HeroService } from '../hero.service';
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'my-heroes',
@@ -10,61 +11,76 @@ import { HeroService } from '../hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
+
+  // Enfoque 1
   heroes: Hero[];
-  selectedHero: Hero;
-  addingHero = false;
+
+  // Enfoque 2
+  //heroes: Observable<Hero[]>;
+
+  auxHeroes: Hero[];
   error: any;
+  start: number = 0;
+  readonly offset: number = 5;
 
   constructor(
     private router: Router,
     private heroService: HeroService) { }
 
   getHeroes(): void {
-    this.heroService.getHeroes().subscribe(
-      heroes => this.heroes = heroes
-    )
-  }
+    // Enfoque 1
+    this.heroService.getHeroes(this.start, this.offset).subscribe(
+      (heroes: Hero[]) => {
+        this.heroes = heroes;
+        this.auxHeroes = this.heroes.slice();
+      }
+    );
 
-  addHero(): void {
-    this.addingHero = true;
-    this.selectedHero = null;
-  }
-
-  close(savedHero: Hero): void {
-    this.addingHero = false;
-    if (savedHero) { this.getHeroes(); }
+    // Enfoque 2
+    //this.heroes = this.heroService.getHeroes();
   }
 
   deleteHero(hero: Hero, event: any): void {
     event.stopPropagation();
     this.heroService
       .delete(hero.id)
-      .subscribe(res => {
-        this.getHeroes();
-        //this.heroes = this.heroes.filter(h => h !== hero);
-        //if (this.selectedHero === hero) { this.selectedHero = null; }
-      }, error => this.error = error);
+      .subscribe(
+        (res: any) => {
+          this.getHeroes();
+        }, 
+        (error: any) => this.error = error
+      );
   }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.addingHero = false;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero.id]);
-  }
-
   vote(hero: Hero): void {
-    hero.votes++;
-    hero.alreadyVoted = true;
-    this.heroService.vote(hero.id)
+    this.heroService.vote(hero)
     .subscribe(
       (response: any) => this.getHeroes()
     );
+  }
+
+  search(searchString: string) : void {
+    if (searchString && searchString.length) {
+      this.heroes = this.auxHeroes.filter(
+        (hero: Hero) => hero.name.toLocaleLowerCase().includes(searchString.toLocaleLowerCase())
+      );
+    }
+    else {
+      this.heroes = this.auxHeroes;
+    }
+  }
+
+  nextPage(): void {
+    this.start += this.offset;
+    this.getHeroes();
+  }
+
+  previousPage(): void {
+    this.start -= this.offset;
+    this.getHeroes();
   }
 }

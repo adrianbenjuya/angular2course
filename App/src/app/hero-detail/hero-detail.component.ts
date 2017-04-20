@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -11,16 +11,15 @@ import { Observable } from "rxjs/Observable";
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css']
 })
-export class HeroDetailComponent implements OnInit, AfterViewInit {
+export class HeroDetailComponent implements OnInit {
 
-  @Input() hero: Hero;
-  @Output() close = new EventEmitter();
-  @ViewChild('heroNameInput') heroNameInput: ElementRef;
+  hero: Hero;
+  isCreating: boolean = true;
   error: any;
-  navigated = false; // true if navigated here
   originalImg: string;
   tempImg: string;
   resetImg: boolean = false;
+  saveLoading: boolean = false;
 
   constructor(
     private heroService: HeroService,
@@ -32,10 +31,10 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
     this.route.params
     .switchMap(
       (param: Params) => {
-        let id: number = +param['id'];
-        if (id !== undefined) {
-          this.navigated = true;
-          return this.heroService.getHero(id);
+        let id: string = param['id'];
+        if (id && id.length) {
+          this.isCreating = false;
+          return this.heroService.getHero(+id);
         }
         
         return Observable.of(new Hero());
@@ -51,22 +50,15 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit(): void {
-    
-  }
-
   save(): void {
     this.error = null;
+    this.saveLoading = true;
     this.heroService.save(this.hero).subscribe(
       (response: any) => this.location.back(),
-      (err: any) => this.error = err
+      (err: any) => this.error = err,
+      () => this.saveLoading = false
     )
   }
-
-  // goBack(savedHero: Hero = null): void {
-  //   this.close.emit(savedHero);
-  //   if (this.navigated) { window.history.back(); }
-  // }
 
   replaceImage(reset: boolean = false) : void {
     if (this.hero.image === this.tempImg && !reset) {

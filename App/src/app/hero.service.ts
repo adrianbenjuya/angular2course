@@ -2,38 +2,45 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { AppConfig } from './app.config';
 import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/retry';
 
 import { Hero } from './models/hero';
 
 @Injectable()
 export class HeroService {
-    private heroesUrl = 'app/heroes';  // URL to web api
     private jsonHeader = new Headers({
         'Content-Type': 'application/json'
     });
 
+    public heroesAmount: number;
+
     constructor(private http: Http) { }
 
-    getHeroes(): Observable<Hero[]> {
+    getHeroes(start?: number, offset?: number): Observable<Hero[]> {
+        let url: string = AppConfig.HEROES_URL;
+        if (start !== undefined && offset !== undefined) {
+            url += `?start=${start}&offset=${offset}`;
+        }
         return this.http
-            .get(AppConfig.HEROES_URL)
-            .map(response => Hero.fromJsonArray(response.json()))
+            .get(url)
+            .map(response => {
+                let json = response.json();
+                this.heroesAmount = json.total;
+                return Hero.fromJsonArray(json.data);
+            })
+            .retry()
             .catch(this.handleError);
     }
 
     getHero(id: number): Observable<Hero> {
-        if (AppConfig.TEST_ENVIRONMENT) {
-            return this.http.get(AppConfig.HEROES_URL)
-            .map(r => Hero.fromJsonArray(r.json()).filter(h => h.id === id)[0]);
-        }
-        else {
-            return this.http.get(AppConfig.HEROES_URL + 'get/' + id)
-                .map(response => response.json())
-                .map(response => Hero.fromJson(response));
-        }
+        return this.http.get(AppConfig.HEROES_URL + 'get/' + id)
+            .map(response => response.json())
+            .map(response => Hero.fromJson(response))
+            .retry()
+            .catch(this.handleError);
     }
 
-    save(hero: Hero): Observable<any> {
+    save(hero: Hero): Observable<Hero> {
         if (hero.id) {
             return this.put(hero);
         }
@@ -54,21 +61,25 @@ export class HeroService {
 
         return this.http
             .post(AppConfig.HEROES_URL, JSON.stringify(hero), { headers: this.jsonHeader })
+            .map((r: Response) => Hero.fromJson(r))
             .catch(this.handleError);
     }
 
     // Update existing Hero
-    private put(hero: Hero): Observable<boolean> {
+    private put(hero: Hero): Observable<Hero> {
 
         let url = AppConfig.HEROES_URL + hero.id;
 
         return this.http
             .put(url, JSON.stringify(hero), { headers: this.jsonHeader })
+            .map((r: Response) => Hero.fromJson(r))
             .catch(this.handleError);
     }
 
-    vote(heroId: number): Observable<any> {
-        let url: string = AppConfig.HEROES_URL + 'vote/' + heroId;
+    vote(hero: Hero): Observable<any> {
+        hero.votes++;
+        hero.alreadyVoted = true;
+        let url: string = AppConfig.HEROES_URL + 'vote/' + hero.id;
         return this.http.get(url).catch(this.handleError);
     }
 

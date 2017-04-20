@@ -67,3 +67,11 @@ button.delete-button{
   background-color: rgb(216,59,1) !important;
   color:white;
 }*/
+
+td {
+  vertical-align: middle !important;
+}
+
+.col-md-8 button {
+  margin-left: 5px;
+}
