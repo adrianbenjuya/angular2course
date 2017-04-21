@@ -16,10 +16,10 @@ export class HeroService {
 
     constructor(private http: Http) { }
 
-    getHeroes(start?: number, offset?: number): Observable<Hero[]> {
+    getHeroes(start?: number, offset?: number, orderby?: string, orderdir?: string): Observable<Hero[]> {
         let url: string = AppConfig.HEROES_URL;
-        if (start !== undefined && offset !== undefined) {
-            url += `?start=${start}&offset=${offset}`;
+        if (start !== undefined && offset !== undefined && orderby !== undefined && orderdir !== undefined) {
+            url += `?start=${start}&offset=${offset}&orderby=${orderby}&orderdir=${orderdir}`;
         }
         return this.http
             .get(url)

@@ -22,6 +22,8 @@ export class HeroesComponent implements OnInit {
   error: any;
   start: number = 0;
   readonly offset: number = 5;
+  orderby: string = 'id';
+  orderdir: string = 'asc';
 
   constructor(
     private router: Router,
@@ -29,7 +31,7 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     // Enfoque 1
-    this.heroService.getHeroes(this.start, this.offset).subscribe(
+    this.heroService.getHeroes(this.start, this.offset, this.orderby, this.orderdir).subscribe(
       (heroes: Hero[]) => {
         this.heroes = heroes;
         this.auxHeroes = this.heroes.slice();
@@ -75,12 +77,22 @@ export class HeroesComponent implements OnInit {
   }
 
   nextPage(): void {
+    this.heroes.length = 0;
     this.start += this.offset;
     this.getHeroes();
   }
 
   previousPage(): void {
+    this.heroes.length = 0;
     this.start -= this.offset;
     this.getHeroes();
+  }
+
+  orderBy(by: string) {
+    this.orderby = (by && by.length) ? by : 'id';
+    this.orderdir = this.orderdir === 'asc' ? 'desc' : 'asc';
+    this.start = 0;
+
+    this.getHeroes()
   }
 }

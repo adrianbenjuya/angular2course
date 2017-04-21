@@ -16,10 +16,41 @@ namespace TourOfHeroes.Controllers
         private Context db = new Context();
 
         // GET: api/Heroes
-        public IHttpActionResult GetHeroes(int? start = null, int? offset = null)
+        public IHttpActionResult GetHeroes(int? start = null, int? offset = null, string orderby = null, string orderdir = null)
         {
             var heroes = new List<HeroDTO>();
-            var heroesDb = db.Heroes.OrderBy(h => h.Id).Skip(start ?? 0).Take(offset ?? db.Heroes.Count());
+            IQueryable<Hero> heroesDb;
+            var order = $"{orderby}&{orderdir}";
+            switch(order)
+            {
+                case "name&asc":
+                    heroesDb = db.Heroes.OrderBy(h => h.Name);
+                    break;
+
+                case "name&desc":
+                    heroesDb = db.Heroes.OrderByDescending(h => h.Name);
+                    break;
+
+                case "votes&asc":
+                    heroesDb = db.Heroes.OrderBy(h => db.Votes.Where(v => v.HeroId == h.Id).Count());
+                    break;
+
+                case "votes&desc":
+                    heroesDb = db.Heroes.OrderByDescending(h => db.Votes.Where(v => v.HeroId == h.Id).Count());
+                    break;
+
+                case "id&desc":
+                    heroesDb = db.Heroes.OrderByDescending(h => h.Id);
+                    break;
+
+                case "id&asc":
+                default:
+                    heroesDb = db.Heroes.OrderBy(h => h.Id);
+                    break;
+            }
+
+            heroesDb = heroesDb.Skip(start ?? 0).Take(offset ?? db.Heroes.Count());
+
             foreach (var hero in heroesDb)
             {
                 heroes.Add(DTOFactory(hero));
@@ -124,7 +155,15 @@ namespace TourOfHeroes.Controllers
             };
 
             db.Votes.Add(vote);
-            db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
 
             return Ok(new { votes = db.Votes.Where(v => v.HeroId == id).Count() });
         }

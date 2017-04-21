@@ -16,6 +16,7 @@
             <button routerLink="../create" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button>
             <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + offset >= heroService.heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
             <button (click)="previousPage()" type="button" class="btn btn-secondary pull-right" [disabled]="!start"><span class="glyphicon glyphicon-chevron-left"></span></button>
+            <h4 class="pull-right">Page {{(start / offset) + 1}}</h4>
           </div>
         </div>
       </div>
@@ -26,7 +27,11 @@
         <table class="table table-hover">
 
           <thead>
-            <tr><th>#ID</th><th>Name</th><th>Votes</th><th>Actions</th></tr>
+            <tr>
+              <th class="pointer" (click)="orderBy('id')">#ID <span *ngIf="orderby === 'id'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></th>
+              <th class="pointer" (click)="orderBy('name')">Name <span *ngIf="orderby === 'name'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></th>
+              <th class="pointer" (click)="orderBy('votes')">Votes <span *ngIf="orderby === 'votes'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></th>
+              <th>Actions</th></tr>
           </thead>
 
           <tbody>
