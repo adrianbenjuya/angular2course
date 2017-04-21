@@ -14,9 +14,9 @@
           </div>
           <div class="col-md-8">
             <button routerLink="../create" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button>
-            <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + offset >= heroService.heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + heroService.offset >= heroService.heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
             <button (click)="previousPage()" type="button" class="btn btn-secondary pull-right" [disabled]="!start"><span class="glyphicon glyphicon-chevron-left"></span></button>
-            <h4 class="pull-right">Page {{(start / offset) + 1}}</h4>
+            <h4 class="pull-right">Page {{heroService.currentPage}}</h4>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
                 <button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
               </td>
               <td class="col-md-2">
-                <button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)">Delete</button>
+                <button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)"><span class="glyphicon glyphicon-trash"></span></button>
               </td>
             </tr>
           </tbody>

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { AppConfig } from './app.config';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/retryWhen';
+import 'rxjs/add/operator/delay';
 
 import { Hero } from './models/hero';
 
@@ -12,14 +13,16 @@ export class HeroService {
         'Content-Type': 'application/json'
     });
 
+    public currentPage: number = 1;
     public heroesAmount: number;
+    public readonly offset: number = 3;
 
     constructor(private http: Http) { }
 
-    getHeroes(start?: number, offset?: number, orderby?: string, orderdir?: string): Observable<Hero[]> {
+    getHeroes(start?: number, orderby?: string, orderdir?: string): Observable<Hero[]> {
         let url: string = AppConfig.HEROES_URL;
-        if (start !== undefined && offset !== undefined && orderby !== undefined && orderdir !== undefined) {
-            url += `?start=${start}&offset=${offset}&orderby=${orderby}&orderdir=${orderdir}`;
+        if (start !== undefined && orderby !== undefined && orderdir !== undefined) {
+            url += `?start=${start}&offset=${this.offset}&orderby=${orderby}&orderdir=${orderdir}`;
         }
         return this.http
             .get(url)
@@ -28,7 +31,7 @@ export class HeroService {
                 this.heroesAmount = json.total;
                 return Hero.fromJsonArray(json.data);
             })
-            .retry()
+            .retryWhen((errors: Observable<any>) => errors.delay(2000))
             .catch(this.handleError);
     }
 
@@ -36,7 +39,7 @@ export class HeroService {
         return this.http.get(AppConfig.HEROES_URL + 'get/' + id)
             .map(response => response.json())
             .map(response => Hero.fromJson(response))
-            .retry()
+            .retryWhen((errors: Observable<any>) => errors.delay(2000))
             .catch(this.handleError);
     }
 

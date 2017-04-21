@@ -21,7 +21,6 @@ export class HeroesComponent implements OnInit {
   auxHeroes: Hero[];
   error: any;
   start: number = 0;
-  readonly offset: number = 5;
   orderby: string = 'id';
   orderdir: string = 'asc';
 
@@ -31,7 +30,7 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     // Enfoque 1
-    this.heroService.getHeroes(this.start, this.offset, this.orderby, this.orderdir).subscribe(
+    this.heroService.getHeroes(this.start, this.orderby, this.orderdir).subscribe(
       (heroes: Hero[]) => {
         this.heroes = heroes;
         this.auxHeroes = this.heroes.slice();
@@ -55,6 +54,7 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.start = (this.heroService.currentPage - 1) * this.heroService.offset;
     this.getHeroes();
   }
 
@@ -77,14 +77,16 @@ export class HeroesComponent implements OnInit {
   }
 
   nextPage(): void {
+    this.heroService.currentPage++;
     this.heroes.length = 0;
-    this.start += this.offset;
+    this.start += this.heroService.offset;
     this.getHeroes();
   }
 
   previousPage(): void {
+    this.heroService.currentPage--;
     this.heroes.length = 0;
-    this.start -= this.offset;
+    this.start -= this.heroService.offset;
     this.getHeroes();
   }
 
@@ -92,6 +94,7 @@ export class HeroesComponent implements OnInit {
     e.preventDefault();
     this.orderby = (by && by.length) ? by : 'id';
     this.orderdir = this.orderdir === 'asc' ? 'desc' : 'asc';
+    this.heroService.currentPage = 1;
     this.start = 0;
 
     this.getHeroes()
