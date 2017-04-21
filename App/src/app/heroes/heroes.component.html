@@ -28,10 +28,10 @@
 
           <thead>
             <tr>
-              <th class="pointer" (click)="orderBy('id')">#ID <span *ngIf="orderby === 'id'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></th>
-              <th class="pointer" (click)="orderBy('name')">Name <span *ngIf="orderby === 'name'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></th>
-              <th class="pointer" (click)="orderBy('votes')">Votes <span *ngIf="orderby === 'votes'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></th>
-              <th>Actions</th></tr>
+              <th class="col-md-2"><a href="#" (click)="orderBy($event, 'id')">#ID <span *ngIf="orderby === 'id'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
+              <th class="col-md-6"><a href="#" (click)="orderBy($event, 'name')">Name <span *ngIf="orderby === 'name'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
+              <th class="col-md-2"><a href="#" (click)="orderBy($event, 'votes')">Votes <span *ngIf="orderby === 'votes'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
+              <th class="col-md-2">Actions</th></tr>
           </thead>
 
           <tbody>
@@ -41,13 +41,15 @@
             <!-- Enfoque 2 -->
             <!-- <tr *ngFor="let hero of heroes | async"> -->
 
-              <td>#{{hero.id}}</td>
-              <td><a [routerLink]="['/detail', hero.id]">{{hero.name}}</a></td>
-              <td>
+              <td class="col-md-2">#{{hero.id}}</td>
+              <td class="col-md-6"><a [routerLink]="['/detail', hero.id]">{{hero.name}}</a></td>
+              <td class="col-md-2">
                 <span>{{hero.votes}}</span>
                 <button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
               </td>
-              <td><button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)">Delete</button></td>
+              <td class="col-md-2">
+                <button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)">Delete</button>
+              </td>
             </tr>
           </tbody>
         </table>

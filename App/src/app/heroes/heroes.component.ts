@@ -88,7 +88,8 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
-  orderBy(by: string) {
+  orderBy(e: MouseEvent, by: string) {
+    e.preventDefault();
     this.orderby = (by && by.length) ? by : 'id';
     this.orderdir = this.orderdir === 'asc' ? 'desc' : 'asc';
     this.start = 0;
