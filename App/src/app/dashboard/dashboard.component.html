@@ -85,22 +85,37 @@
   </div>-->
 
   <!-- Ejercicio 15 -->
-  <loading *ngIf="!heroes"></loading>
-  <div *ngIf="heroes" class="col-md-12">
+  <!--<loading *ngIf="!heroes"></loading>
+  <div *ngIf="heroes" class="col-md-12">-->
     <!-- Enfoque 1 -->
     <!--<div *ngFor="let hero of heroes; let first = first; let last = last"
          class="col-md-4"
          (click)="gotoDetail(hero)">-->
     <!-- Enfoque 2.a -->
-    <div *ngFor="let hero of heroes; let first = first; let last = last"
-         class="col-md-4" [routerLink]="['/detail', hero.id]">
+    <!--<div *ngFor="let hero of heroes; let first = first; let last = last"
+         class="col-md-4" [routerLink]="['/detail', hero.id]">-->
     <!-- Enfoque 2.b -->
       <!--<div *ngFor="let hero of heroes; let first = first; let last = last"
          class="col-md-4" [routerLink]="['/detail', { id: hero.id }]">-->
-         <div [ngClass]="{'thumbnail': true, 'gold': first, 'silver': !first && !last, 'bronze': last}">
+         <!--<div [ngClass]="{'thumbnail': true, 'gold': first, 'silver': !first && !last, 'bronze': last}">
             <h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
          </div>
       </div>
+    </div>-->
+
+  <!-- Ejercicio 16 -->
+  <loading *ngIf="!heroes"></loading>
+  <div *ngIf="heroes" class="col-md-12">
+    <div *ngFor="let hero of heroes; let first = first; let last = last"
+         class="col-md-4" (click)="heroDo(hero)">
+        <div [ngClass]="{'thumbnail': true, 'gold': first, 'silver': !first && !last, 'bronze': last}">
+          <h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
+        </div>
     </div>
+  </div>
+
+  <label class="control-label">Hero to do</label><br>
+  <input type="radio" name="todo" [(ngModel)]="heroTodo" value="popup"> Show Popup<br>
+  <input type="radio" name="todo" [(ngModel)]="heroTodo" value="details"> Go Details<br>
 
 </div>

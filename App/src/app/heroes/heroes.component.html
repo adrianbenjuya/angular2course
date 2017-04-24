@@ -1,58 +1,72 @@
 <div class="row">
   <div class="col-md-12">
 
-    <loading *ngIf="!heroes"></loading>
-
-    <div *ngIf="heroes" class="row">
+    <div class="row">
       <div class="col-md-12 form-horizontal">
         <div class="row">
           <div class="col-md-4">
-            <label class="control-label col-md-2" for="search">Search:</label>
+            <!-- Ejercicio 17 -->
+             <!--<label class="control-label col-md-2" for="search">Search:</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="search" (input)="search($event.target.value)" />
-            </div>
+            </div> -->
           </div>
           <div class="col-md-8">
-            <button routerLink="../create" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button>
-            <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + heroService.offset >= heroService.heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            <!-- Ejercicio 20 -->
+            <!--<button routerLink="/create" type="button" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button>-->
+            <!--<button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + heroService.offset >= heroService.heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
             <button (click)="previousPage()" type="button" class="btn btn-secondary pull-right" [disabled]="!start"><span class="glyphicon glyphicon-chevron-left"></span></button>
-            <h4 class="pull-right">Page {{heroService.currentPage}}</h4>
+            <h4 class="pull-right">Page {{heroService.currentPage}}</h4>-->
           </div>
         </div>
       </div>
     </div>
 
-    <div *ngIf="heroes" class="row">
+    <div class="row">
       <div class="col-md-12">
         <table class="table table-hover">
 
           <thead>
             <tr>
-              <th class="col-md-2"><a href="#" (click)="orderBy($event, 'id')">#ID <span *ngIf="orderby === 'id'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
+              <th class="col-md-2">#ID</th>
+              <th class="col-md-6">Name</th>
+              <th class="col-md-2">Votes</th>
+              <!--<th class="col-md-2"><a href="#" (click)="orderBy($event, 'id')">#ID <span *ngIf="orderby === 'id'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
               <th class="col-md-6"><a href="#" (click)="orderBy($event, 'name')">Name <span *ngIf="orderby === 'name'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
-              <th class="col-md-2"><a href="#" (click)="orderBy($event, 'votes')">Votes <span *ngIf="orderby === 'votes'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>
+              <th class="col-md-2"><a href="#" (click)="orderBy($event, 'votes')">Votes <span *ngIf="orderby === 'votes'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a></th>-->
               <th class="col-md-2">Actions</th></tr>
           </thead>
 
           <tbody>
-            <!-- Enfoque 1 -->
+            <!-- Ejercicio 15, Enfoque 1 -->
             <tr *ngFor="let hero of heroes">
 
-            <!-- Enfoque 2 -->
+            <!-- Ejercicio 15, Enfoque 2 -->
             <!-- <tr *ngFor="let hero of heroes | async"> -->
 
               <td class="col-md-2">#{{hero.id}}</td>
-              <td class="col-md-6"><a [routerLink]="['/detail', hero.id]">{{hero.name}}</a></td>
+              <td class="col-md-6">{{hero.name}}</td>
+              <!-- Ejercicio 21 Enfoque 1A-->
+              <!--<td class="col-md-6"><a [routerLink]="['/detail', hero.id]">{{hero.name}}</a></td>-->
+              <!-- Ejercicio 21 Enfoque 1B-->
+              <!--<td class="col-md-6"><a [routerLink]="['/detail', { id: hero.id }]">{{hero.name}}</a></td>-->
+              <!-- Ejercicio 21 Enfoque 2-->
+              <!--<td class="col-md-6"><a href="#" (click)="gotoDetail($event, hero)">{{hero.name}}</a></td>-->
               <td class="col-md-2">
                 <span>{{hero.votes}}</span>
-                <button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                <!-- Ejercicio 18 -->
+                <!--<button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>-->
               </td>
               <td class="col-md-2">
-                <button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)"><span class="glyphicon glyphicon-trash"></span></button>
+                <!-- Ejercicio 19 -->
+                <!--<button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)"><span class="glyphicon glyphicon-trash"></span></button>-->
               </td>
             </tr>
           </tbody>
         </table>
+
+        <loading *ngIf="!heroes"></loading>
+
       </div>
     </div>
   </div>

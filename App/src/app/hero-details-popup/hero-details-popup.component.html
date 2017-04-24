@@ -8,7 +8,8 @@
         <h4 class="modal-title">{{_hero.name}}</h4>
       </div>
       <div class="modal-body">
-        <p>{{_hero.description}}</p>
+        <p>{{_hero.description || 'No description yet'}}</p>
+        <img *ngIf="_hero.image && _hero.image.length" style="width: 100%" src="{{_hero.image}}" />
       </div>
       <div class="modal-footer">
         <button (click)="close()" type="button" class="btn btn-default">Close</button>
@@ -27,7 +28,26 @@
         <h4 class="modal-title">{{hero.name}}</h4>
       </div>
       <div class="modal-body">
-        <p>{{hero.description}}</p>
+        <p>{{hero.description || 'No description yet'}}</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="close()" type="button" class="btn btn-default">Close</button>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<!-- Enfoque 3 -->
+<!--<div #overlay [class.show]="_show" id="overlay"></div>
+<div #popup class="modal fade" [class.in]="_show" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="close()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{_hero?.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{_hero?.description || 'No description yet'}}</p>
       </div>
       <div class="modal-footer">
         <button (click)="close()" type="button" class="btn btn-default">Close</button>

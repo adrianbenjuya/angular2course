@@ -12,91 +12,115 @@ import { Observable } from "rxjs/Observable";
 })
 export class HeroesComponent implements OnInit {
 
-  // Enfoque 1
+  // Ejercicio 15, Enfoque 1
   heroes: Hero[];
 
-  // Enfoque 2
+  // Ejercicio 15, Enfoque 2
   //heroes: Observable<Hero[]>;
 
+  // Ejercicio 17
   auxHeroes: Hero[];
-  error: any;
-  start: number = 0;
-  orderby: string = 'id';
-  orderdir: string = 'asc';
+
+  //start: number = 0;
+  //orderby: string = 'id';
+  //orderdir: string = 'asc';
 
   constructor(
     private router: Router,
     private heroService: HeroService) { }
 
   getHeroes(): void {
-    // Enfoque 1
-    this.heroService.getHeroes(this.start, this.orderby, this.orderdir).subscribe(
+
+    // Ejercicio 15, Enfoque 1
+    this.heroService.getHeroes().subscribe(
       (heroes: Hero[]) => {
         this.heroes = heroes;
-        this.auxHeroes = this.heroes.slice();
+
+        // Ejercicio 17
+        //this.auxHeroes = this.heroes.slice();
       }
     );
+    
+    // this.heroService.getHeroes(this.start, this.orderby, this.orderdir).subscribe(
+    //   (heroes: Hero[]) => {
+    //     this.heroes = heroes;
+    //     this.auxHeroes = this.heroes.slice();
+    //   }
+    // );
 
-    // Enfoque 2
+    // Ejercicio 15, Enfoque 2
     //this.heroes = this.heroService.getHeroes();
   }
 
-  deleteHero(hero: Hero, event: any): void {
-    event.stopPropagation();
-    this.heroService
-      .delete(hero.id)
-      .subscribe(
-        (res: any) => {
-          this.getHeroes();
-        }, 
-        (error: any) => this.error = error
-      );
-  }
-
   ngOnInit(): void {
-    this.start = (this.heroService.currentPage - 1) * this.heroService.offset;
+    //this.start = (this.heroService.currentPage - 1) * this.heroService.offset;
     this.getHeroes();
   }
 
-  vote(hero: Hero): void {
-    this.heroService.vote(hero)
-    .subscribe(
-      (response: any) => this.getHeroes()
-    );
-  }
+  
+  // Ejercicio 17
+  // search(searchString: string) : void {
+  //   if (searchString && searchString.length) {
+  //     this.heroes = this.auxHeroes.filter(
+  //       (hero: Hero) => hero.name.toLocaleLowerCase().trim().includes(searchString.toLocaleLowerCase().trim())
+  //     );
+  //   }
+  //   else {
+  //     this.heroes = this.auxHeroes;
+  //   }
+  // }
 
-  search(searchString: string) : void {
-    if (searchString && searchString.length) {
-      this.heroes = this.auxHeroes.filter(
-        (hero: Hero) => hero.name.toLocaleLowerCase().includes(searchString.toLocaleLowerCase())
-      );
-    }
-    else {
-      this.heroes = this.auxHeroes;
-    }
-  }
+  // Ejercicio 18
+  // vote(hero: Hero): void {
+  //   this.heroService.vote(hero)
+  //   .subscribe(
+  //     (response: any) => this.getHeroes()
+  //   );
+  // }
 
-  nextPage(): void {
-    this.heroService.currentPage++;
-    this.heroes.length = 0;
-    this.start += this.heroService.offset;
-    this.getHeroes();
-  }
+  // Ejercicio 19
+  // deleteHero(hero: Hero, event: any): void {
+  //   event.stopPropagation();
+  //   this.heroService
+  //     .delete(hero.id)
+  //     .subscribe(
+  //       (res: any) => {
+  //         this.getHeroes();
+  //       }
+  //     );
+  // }
 
-  previousPage(): void {
-    this.heroService.currentPage--;
-    this.heroes.length = 0;
-    this.start -= this.heroService.offset;
-    this.getHeroes();
-  }
-
-  orderBy(e: MouseEvent, by: string) {
+  // Ejercicio 21
+  gotoDetail(e: any, hero: Hero): void {
     e.preventDefault();
-    this.orderby = (by && by.length) ? by : 'id';
-    this.orderdir = this.orderdir === 'asc' ? 'desc' : 'asc';
-    this.heroService.currentPage = 1;
-    this.start = 0;
+    // Enfoque A
+    this.router.navigate(['/detail', hero.id]);
 
-    this.getHeroes()
+    // Enfoque B
+    //this.router.navigate(['/detail', { id: hero.id }]);
   }
+
+  // nextPage(): void {
+  //   this.heroService.currentPage++;
+  //   this.heroes.length = 0;
+  //   this.start += this.heroService.offset;
+  //   this.getHeroes();
+  // }
+
+  // previousPage(): void {
+  //   this.heroService.currentPage--;
+  //   this.heroes.length = 0;
+  //   this.start -= this.heroService.offset;
+  //   this.getHeroes();
+  // }
+
+  // orderBy(e: MouseEvent, by: string) {
+  //   e.preventDefault();
+  //   this.orderby = (by && by.length) ? by : 'id';
+  //   this.orderdir = this.orderdir === 'asc' ? 'desc' : 'asc';
+  //   this.heroService.currentPage = 1;
+  //   this.start = 0;
+
+  //   this.getHeroes()
+  // }
 }

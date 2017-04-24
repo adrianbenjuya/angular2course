@@ -37,9 +37,8 @@ export class HeroService {
 
     getHero(id: number): Observable<Hero> {
         return this.http.get(AppConfig.HEROES_URL + 'get/' + id)
-            .map(response => response.json())
-            .map(response => Hero.fromJson(response))
-            .retryWhen((errors: Observable<any>) => errors.delay(2000))
+            .map(response => Hero.fromJson(response.json()))
+            //.retryWhen((errors: Observable<any>) => errors.delay(2000))
             .catch(this.handleError);
     }
 

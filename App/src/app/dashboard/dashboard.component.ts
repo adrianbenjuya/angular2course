@@ -14,14 +14,17 @@ export class DashboardComponent implements OnInit {
     // Ejercicios: 9 en adelante
     heroes: Hero[];
 
-    //Ejercicios: 1 en adelante
+    // Ejercicios: 1 en adelante
     hero: Hero;
 
-    //Ejercicios: 8
+    // Ejercicios: 8
     allowVotes: boolean = false;
 
-    //Ejercicio: 12
+    // Ejercicio: 12
     selectedHero: Hero;
+
+    // Ejercicio 16
+    heroTodo: string = 'popup';
 
     constructor(private router: Router,
                 private heroService: HeroService) {
@@ -103,5 +106,15 @@ export class DashboardComponent implements OnInit {
     // Ejercicio 5
     set heroName(value: string) {
         this.hero.name = value;
+    }
+
+    // Ejercicio 16
+    heroDo(hero: Hero) {
+        if (this.heroTodo === 'popup') {
+            this.selectedHero = hero;
+        }
+        else {
+            this.router.navigate(['/detail', hero.id]);
+        }
     }
 }

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, ViewChildren, QueryList, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Hero } from '../models/hero';
 import { HeroService } from '../hero.service';
 import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/finally';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 
 @Component({
@@ -12,18 +13,15 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/fo
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css']
 })
-export class HeroDetailComponent implements OnInit {
+export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewInit */ {
 
   hero: Hero;
   isCreating: boolean = true;
   error: any;
-  originalImg: string;
-  tempImg: string;
-  resetImg: boolean = false;
   saveLoading: boolean = false;
 
   //Reactive Form
-  heroForm: FormGroup;
+  // heroForm: FormGroup;
   nameMsg: string;
   validationNameMsgs: any = {
     required: 'The Name field is required',
@@ -33,7 +31,9 @@ export class HeroDetailComponent implements OnInit {
   validationDescriptionMsgs: any = {
     maxlength: "The Description can't have more than 200 characters"
   }
-  image: string;
+
+  // Ejercicio 22
+  //@ViewChildren('heroNameInput') heroNameInput: QueryList<ElementRef>;
 
   constructor(
     private heroService: HeroService,
@@ -43,85 +43,108 @@ export class HeroDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params
-    .switchMap(
-      (param: Params) => {
-        let id: string = param['id'];
-        if (id && id.length) {
-          this.isCreating = false;
-          return this.heroService.getHero(+id);
-        }
+
+    // Ejercicio 20
+    this.hero = new Hero();
+
+    // Ejercicio 21
+    // this.route.params
+    // .switchMap(
+    //   (param: Params) => {
+    //     let id: string = param['id'];
+    //     if (id && id.length) {
+    //       this.isCreating = false;
+    //       return this.heroService.getHero(+id);
+    //     }
         
-        return Observable.of(new Hero());
-      }
-    )
-    .subscribe(
-      (hero: Hero) => {
+    //     return Observable.of(new Hero());
+    //   }
+    // )
+    // .subscribe(
+    //   (hero: Hero) => {
 
-        // Template driven form
-        this.hero = hero;
-        //this.originalImg = this.hero ? this.hero.image : '';
-        //this.tempImg = this.originalImg;
+    //     this.hero = hero;
 
-        // Reactive form
-        this.heroForm = this.fb.group({
-          id: { value: hero.id, disabled: true },
-          name: [hero.name, [Validators.required, Validators.maxLength(20)]],
-          description: [hero.description, Validators.maxLength(200)],
-          image: hero.image
-        });
+    //     // Reactive form
+    //     // this.heroForm = this.fb.group({
+    //     //   id: { value: hero.id, disabled: true },
+    //     //   name: [hero.name, [Validators.required, Validators.maxLength(20)]],
+    //     //   description: [hero.description, Validators.maxLength(200)],
+    //     //   image: hero.image
+    //     // });
 
-        const nameControl: AbstractControl = this.heroForm.get('name');
-        const descriptionControl: AbstractControl = this.heroForm.get('description');
-        nameControl.valueChanges.subscribe((v: any) => this.nameMsg = this.setMessage(this.validationNameMsgs, nameControl))
-        descriptionControl.valueChanges.subscribe((v: any) => this.descriptionMsg = this.setMessage(this.validationDescriptionMsgs, descriptionControl))
-      },
-      (err: any) => this.error = err
-    );
+    //     // const nameControl: AbstractControl = this.heroForm.get('name');
+    //     // const descriptionControl: AbstractControl = this.heroForm.get('description');
+    //     // nameControl.valueChanges.subscribe((v: any) => this.nameMsg = this.setMessage(this.validationNameMsgs, nameControl))
+    //     // descriptionControl.valueChanges.subscribe((v: any) => this.descriptionMsg = this.setMessage(this.validationDescriptionMsgs, descriptionControl))
+    //   },
+    //   (err: any) => this.error = err
+    // );
   }
 
-  setMessage(validationMsgs: any, control: AbstractControl): string {
-    if ((control.touched || control.dirty) && control.errors) {
-      return Object.keys(control.errors).map((key: string) => validationMsgs[key]).join(' ');
-    }
-    return '';
-  }
+  // Ejercicio 22
+  // ngAfterViewInit(): void {
+  //   if (!this.heroNameInput.first) {
+  //     this.heroNameInput.changes.subscribe(
+  //       (change: any) => this.focusInput()
+  //     )
+  //   }
+  //   else {
+  //     this.focusInput()
+  //   }
+  // }
+
+  // setMessage(validationMsgs: any, control: AbstractControl): string {
+  //   if ((control.touched || control.dirty) && control.errors) {
+  //     return Object.keys(control.errors).map((key: string) => validationMsgs[key]).join(' ');
+  //   }
+  //   return '';
+  // }
 
   save(): void {
     // Template driven forms
-    // this.error = null;
-    //   this.saveLoading = true;
-    //   this.heroService.save(this.hero).subscribe(
-    //     () => this.location.back(),
-    //     (err: any) => this.error = err,
-    //     () => this.saveLoading = false
-    //   )
+    this.error = null;
+    if (!this.validateForm()) return;
+    this.saveLoading = true;
+    this.heroService.save(this.hero)
+    .finally(() => this.saveLoading = false)
+    .subscribe(
+      () => this.location.back(),
+      (err: any) => this.error = err
+    )
 
     // Reactive forms
-    if (this.heroForm.dirty && this.heroForm.valid) {
-      this.error = null;
-      this.saveLoading = true;
-      let hero: any = Object.assign({}, this.hero, this.heroForm.value);
-      this.heroService.save(hero).subscribe(
-        () => this.location.back(),
-        (err: any) => this.error = err,
-        () => this.saveLoading = false
-      )
-    }
+    // if (this.heroForm.dirty && this.heroForm.valid) {
+    //   this.error = null;
+    //   this.saveLoading = true;
+    //   let hero: any = Object.assign({}, this.hero, this.heroForm.value);
+    //   this.heroService.save(hero)
+    //   .finally(() => this.saveLoading = false)
+    //   .subscribe(
+    //     () => this.location.back(),
+    //     (err: any) => this.error = err
+    //   )
+    // }
   }
 
-  replaceImage(reset: boolean = false) : void {
-    if (this.hero.image === this.tempImg && !reset) {
-      return;
+  validateForm(): boolean {
+    this.nameMsg = this.descriptionMsg = '';
+    if (!this.hero.name || !this.hero.name.length) {
+      this.nameMsg += this.validationNameMsgs.required;
+    }
+    else if (this.hero.name.length > 20) {
+      this.nameMsg += this.nameMsg.length ? ' ' : '' + this.validationNameMsgs.maxlength;
     }
 
-    if (!reset) {
-      this.hero.image = this.tempImg;
-    }
-    else {
-      this.hero.image = this.tempImg = this.originalImg;
+    if (this.hero.description && this.hero.description.length > 200) {
+      this.descriptionMsg += this.validationDescriptionMsgs.maxlength;
     }
 
-    this.resetImg = !reset;
+    return !this.nameMsg.length && !this.descriptionMsg.length;
   }
+
+  // Ejercicio 22
+  // focusInput(): void {
+  //   this.heroNameInput.first.nativeElement.focus();
+  // }
 }

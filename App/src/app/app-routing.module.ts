@@ -18,7 +18,7 @@ const routes: Routes = [
     component: DashboardComponent
   },
 
-  // Ejercicio 14
+  // Ejercicio 21
   {
     // Enfoque A
     path: 'detail/:id',
@@ -27,11 +27,13 @@ const routes: Routes = [
     component: HeroDetailComponent
   },
 
+  // Ejercicio 20
   {
     path: 'create',
     component: HeroDetailComponent
   },
 
+  // Ejercicio 14
   {
     path: 'heroes',
     component: HeroesComponent
