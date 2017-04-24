@@ -100,6 +100,7 @@ export class HeroesComponent implements OnInit {
     //this.router.navigate(['/detail', { id: hero.id }]);
   }
 
+  // Ejercicio 24
   // nextPage(): void {
   //   this.heroService.currentPage++;
   //   this.heroes.length = 0;
@@ -107,6 +108,7 @@ export class HeroesComponent implements OnInit {
   //   this.getHeroes();
   // }
 
+  // Ejercicio 24
   // previousPage(): void {
   //   this.heroService.currentPage--;
   //   this.heroes.length = 0;
@@ -114,6 +116,7 @@ export class HeroesComponent implements OnInit {
   //   this.getHeroes();
   // }
 
+  // Ejercicio 24
   // orderBy(e: MouseEvent, by: string) {
   //   e.preventDefault();
   //   this.orderby = (by && by.length) ? by : 'id';

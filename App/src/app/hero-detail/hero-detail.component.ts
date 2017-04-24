@@ -20,7 +20,8 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
   error: any;
   saveLoading: boolean = false;
 
-  //Reactive Form
+  // Reactive Form
+  // Ejercicio 23
   // heroForm: FormGroup;
   nameMsg: string;
   validationNameMsgs: any = {
@@ -38,8 +39,8 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
   constructor(
     private heroService: HeroService,
     private route: ActivatedRoute,
-    private location: Location,
-    private fb: FormBuilder) {
+    private location: Location
+    /*Ejercicio 23: private fb: FormBuilder*/) {
   }
 
   ngOnInit(): void {
@@ -65,7 +66,9 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
 
     //     this.hero = hero;
 
-    //     // Reactive form
+    //     // Reactive forms
+    //     // Ejercicio 23
+    //     //
     //     // this.heroForm = this.fb.group({
     //     //   id: { value: hero.id, disabled: true },
     //     //   name: [hero.name, [Validators.required, Validators.maxLength(20)]],
@@ -94,6 +97,7 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
   //   }
   // }
 
+  // Ejercicio 23
   // setMessage(validationMsgs: any, control: AbstractControl): string {
   //   if ((control.touched || control.dirty) && control.errors) {
   //     return Object.keys(control.errors).map((key: string) => validationMsgs[key]).join(' ');
@@ -114,6 +118,8 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
     )
 
     // Reactive forms
+    // Ejercicio 23
+    //
     // if (this.heroForm.dirty && this.heroForm.valid) {
     //   this.error = null;
     //   this.saveLoading = true;
