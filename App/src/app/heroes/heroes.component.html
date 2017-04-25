@@ -64,7 +64,14 @@
               </td>
               <td class="col-md-2">
                 <!-- Ejercicio 19 -->
-                <!--<button type="button" class="btn btn-danger" (click)="deleteHero(hero, $event)"><span class="glyphicon glyphicon-trash"></span></button>-->
+                <!--<button type="button"
+                        class="btn btn-danger"
+                        mwlConfirm
+                        title="Delete"
+                        message="Are you sure you want to delele {{hero.name}}?"
+                        (confirm)="deleteHero(hero)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                </button>-->
               </td>
             </tr>
           </tbody>

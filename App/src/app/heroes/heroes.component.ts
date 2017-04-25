@@ -82,8 +82,16 @@ export class HeroesComponent implements OnInit {
   // }
 
   // Ejercicio 19
-  // deleteHero(hero: Hero, event: any): void {
-  //   event.stopPropagation();
+  // deleteHero(hero: Hero): void {
+
+  //   // Si deseamos podemos eliminarlo instantáneamente para una mejor experiencia de usuario
+  //   // El problema acá es que si sucede un error en el server durante el delete tendremos que 
+  //   // reincorporar al héroe a nuestro arreglo. Otra solución es no eliminarlo del arreglo y
+  //   // poner un loading en alguna parte mientras se elimina en el server, de esta forma si ocurre
+  //   // un error entonces solo se muestra un mensaje pero el héroe no va a desaparecer y luego reaparecer
+  //   let heroIndex: number = this.heroes.indexOf(hero);
+  //   this.heroes.splice(heroIndex, 1);
+
   //   this.heroService
   //     .delete(hero.id)
   //     .subscribe(

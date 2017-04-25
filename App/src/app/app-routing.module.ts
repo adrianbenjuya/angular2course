@@ -34,10 +34,10 @@ const routes: Routes = [
   // },
 
   // Ejercicio 14
-  // {
-  //   path: 'heroes',
-  //   component: HeroesComponent
-  // }
+  {
+    path: 'heroes',
+    component: HeroesComponent
+  }
 ];
 
 @NgModule({
