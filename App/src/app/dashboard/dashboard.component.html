@@ -1,13 +1,15 @@
 <!-- Ejercicio 11 -->
-<hero-details-popup [hero]="selectedHero" (onClose)="selectedHero = null"></hero-details-popup>
+<!--<hero-details-popup [hero]="selectedHero" (onClose)="selectedHero = null"></hero-details-popup>-->
 
 <div class="row">
 
   <!-- Ejercicio 1 -->
-  <!--<div class="thumbnail col-md-3">
+  <div class="thumbnail col-md-3">
+    <!-- Enfoque 1 -->
     <h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
-    <h4 [innerHtml]="hero.name + ' (' + hero.votes + ' <i class=\'glyphicon glyphicon-thumbs-up\'></i>)'"></h4>
-  </div>-->
+    <!-- Enfoque 2 -->
+    <!--<h4 [innerHtml]="hero.name + ' (' + hero.votes + ' <i class=\'glyphicon glyphicon-thumbs-up\'></i>)'"></h4>-->
+  </div>
 
   <div class="col-md-12">
     <!-- Ejercicio 2 -->
@@ -104,7 +106,7 @@
     </div>-->
 
   <!-- Ejercicio 16 -->
-  <loading *ngIf="!heroes"></loading>
+  <!--<loading *ngIf="!heroes"></loading>
   <div *ngIf="heroes" class="col-md-12">
     <div *ngFor="let hero of heroes; let first = first; let last = last"
          class="col-md-4" (click)="heroDo(hero)">
@@ -116,6 +118,6 @@
 
   <label class="control-label">Hero to do</label><br>
   <input type="radio" name="todo" [(ngModel)]="heroTodo" value="popup"> Show Popup<br>
-  <input type="radio" name="todo" [(ngModel)]="heroTodo" value="details"> Go Details<br>
+  <input type="radio" name="todo" [(ngModel)]="heroTodo" value="details"> Go Details<br>-->
 
 </div>

@@ -32,11 +32,11 @@ namespace TourOfHeroes.Controllers
                     break;
 
                 case "votes&asc":
-                    heroesDb = db.Heroes.OrderBy(h => db.Votes.Where(v => v.HeroId == h.Id).Count());
+                    heroesDb = db.Heroes.OrderBy(h => db.Votes.Where(v => v.HeroId == h.Id).Count()).ThenBy(h => h.Id);
                     break;
 
                 case "votes&desc":
-                    heroesDb = db.Heroes.OrderByDescending(h => db.Votes.Where(v => v.HeroId == h.Id).Count());
+                    heroesDb = db.Heroes.OrderByDescending(h => db.Votes.Where(v => v.HeroId == h.Id).Count()).ThenBy(h => h.Id);
                     break;
 
                 case "id&desc":

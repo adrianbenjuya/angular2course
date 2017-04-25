@@ -9,35 +9,35 @@ import { LoadingComponent } from './loading/loading.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/dashboard',
+    path: 'dashboard',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent
   },
 
   // Ejercicio 21
-  {
-    // Enfoque A
-    path: 'detail/:id',
-    // Enfoque B
-    //path: 'detail',
-    component: HeroDetailComponent
-  },
+  // {
+  //   // Enfoque A
+  //   path: 'detail/:id',
+  //   // Enfoque B
+  //   //path: 'detail',
+  //   component: HeroDetailComponent
+  // },
 
   // Ejercicio 20
-  {
-    path: 'create',
-    component: HeroDetailComponent
-  },
+  // {
+  //   path: 'create',
+  //   component: HeroDetailComponent
+  // },
 
   // Ejercicio 14
-  {
-    path: 'heroes',
-    component: HeroesComponent
-  }
+  // {
+  //   path: 'heroes',
+  //   component: HeroesComponent
+  // }
 ];
 
 @NgModule({

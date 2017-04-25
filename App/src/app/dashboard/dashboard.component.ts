@@ -11,33 +11,33 @@ import { HeroService } from '../hero.service';
 })
 export class DashboardComponent implements OnInit {
 
-    // Ejercicios: 9 en adelante
-    heroes: Hero[];
-
     // Ejercicios: 1 en adelante
     hero: Hero;
 
+    // Ejercicios: 9 en adelante
+    //heroes: Hero[];
+
     // Ejercicios: 8
-    allowVotes: boolean = false;
+    //allowVotes: boolean = false;
 
     // Ejercicio: 12
-    selectedHero: Hero;
+    //selectedHero: Hero;
 
     // Ejercicio 16
-    heroTodo: string = 'popup';
+    //heroTodo: string = 'popup';
 
     constructor(private router: Router,
-                private heroService: HeroService) {
+                /* Ejercicio 13 private heroService: HeroService*/) {
     }
 
     ngOnInit(): void {
 
         //Ejercicios: 1 en adelante
-        // this.hero = new Hero();
-        // this.hero.id = 1;
-        // this.hero.name = "Batman";
-        // this.hero.votes = 5;
-        // this.hero.description = 'Batman is a fictional superhero appearing in American comic books published by DC Comics. The character was created by artist Bob Kane and writer Bill Finger, and first appeared in Detective Comics #27 (1939). Originally named the "Bat-Man", the character is also referred to by such epithets as the Caped Crusader, the Dark Knight, and the World\'s Greatest Detective';
+        this.hero = new Hero();
+        this.hero.id = 1;
+        this.hero.name = "Batman";
+        this.hero.votes = 5;
+        this.hero.description = 'Batman is a fictional superhero appearing in American comic books published by DC Comics. The character was created by artist Bob Kane and writer Bill Finger, and first appeared in Detective Comics #27 (1939). Originally named the "Bat-Man", the character is also referred to by such epithets as the Caped Crusader, the Dark Knight, and the World\'s Greatest Detective';
 
         //Ejercicios: 9 en adelante
         // this.heroes = new Array<Hero>();
@@ -60,61 +60,63 @@ export class DashboardComponent implements OnInit {
         //this.orderHeroes()
 
         // Ejercicio: 13
-        this.heroService.getHeroes().subscribe(
-            heroes => {
-                this.heroes = heroes;
-                this.orderHeroes(3);
-            }
-        )
-    }
-
-    gotoDetail(hero: Hero): void {
-        // Enfoque A
-        this.router.navigate(['/detail', hero.id]);
-
-        // Enfoque B
-        //this.router.navigate(['/detail', { id: hero.id }]);
+        // this.heroService.getHeroes().subscribe(
+        //     heroes => {
+        //         this.heroes = heroes;
+        //         this.orderHeroes(3);
+        //     }
+        // )
     }
 
     //Ejercicio 3
-    updateVotes(votes: number) : void {
-        this.hero.votes += votes;
+    // updateVotes(votes: number) : void {
+    //     this.hero.votes += votes;
 
-        //Descomentar para reordenar
-        //this.orderHeroes();
-    }
+    //     //Descomentar para reordenar
+    //     //this.orderHeroes();
+    // }
 
-    orderHeroes(slice?: number): void {
-        let heroes: Hero[] = this.heroes.sort((a, b) => {
-                                if (a.votes < b.votes) return 1;
-                                else if (a.votes > b.votes) return -1;
-                                else if (a.name < b.name) return -1;
-                                else if (a.name > b.name) return 1;
-                                else return 0;
-                            });
+    // Ejercicio 10
+    // orderHeroes(slice?: number): void {
+    //     let heroes: Hero[] = this.heroes.sort((a, b) => {
+    //                             if (a.votes < b.votes) return 1;
+    //                             else if (a.votes > b.votes) return -1;
+    //                             else if (a.name < b.name) return -1;
+    //                             else if (a.name > b.name) return 1;
+    //                             else return 0;
+    //                         });
 
-        if (slice) {
-            this.heroes = heroes.slice(0, slice);
-        }
-    }
-
-    // Ejercicio 5
-    get heroName(): string {
-        return this.hero.name;
-    }
+    //     if (slice) {
+    //         this.heroes = heroes.slice(0, slice);
+    //     }
+    // }
 
     // Ejercicio 5
-    set heroName(value: string) {
-        this.hero.name = value;
-    }
+    // get heroName(): string {
+    //     return this.hero.name;
+    // }
+
+    // Ejercicio 5
+    // set heroName(value: string) {
+    //     this.hero.name = value;
+    // }
 
     // Ejercicio 16
-    heroDo(hero: Hero) {
-        if (this.heroTodo === 'popup') {
-            this.selectedHero = hero;
-        }
-        else {
-            this.router.navigate(['/detail', hero.id]);
-        }
-    }
+    // gotoDetail(hero: Hero): void {
+    //     // Enfoque A
+    //     this.router.navigate(['/detail', hero.id]);
+
+    //     // Enfoque B
+    //     //this.router.navigate(['/detail', { id: hero.id }]);
+    // }
+
+    // Ejercicio 16
+    // heroDo(hero: Hero) {
+    //     if (this.heroTodo === 'popup') {
+    //         this.selectedHero = hero;
+    //     }
+    //     else {
+    //         this.router.navigate(['/detail', hero.id]);
+    //     }
+    // }
 }

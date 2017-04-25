@@ -19,7 +19,7 @@ export class HeroesComponent implements OnInit {
   //heroes: Observable<Hero[]>;
 
   // Ejercicio 17
-  auxHeroes: Hero[];
+  //auxHeroes: Hero[];
 
   //start: number = 0;
   //orderby: string = 'id';
@@ -41,6 +41,7 @@ export class HeroesComponent implements OnInit {
       }
     );
     
+    // Ejercicio 24
     // this.heroService.getHeroes(this.start, this.orderby, this.orderdir).subscribe(
     //   (heroes: Hero[]) => {
     //     this.heroes = heroes;
@@ -53,7 +54,9 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Ejercicio 24
     //this.start = (this.heroService.currentPage - 1) * this.heroService.offset;
+
     this.getHeroes();
   }
 
@@ -91,19 +94,19 @@ export class HeroesComponent implements OnInit {
   // }
 
   // Ejercicio 21
-  gotoDetail(e: any, hero: Hero): void {
-    e.preventDefault();
-    // Enfoque A
-    this.router.navigate(['/detail', hero.id]);
+  // gotoDetail(e: any, hero: Hero): void {
+  //   e.preventDefault();
+  //   // Enfoque A
+  //   this.router.navigate(['/detail', hero.id]);
 
-    // Enfoque B
-    //this.router.navigate(['/detail', { id: hero.id }]);
-  }
+  //   // Enfoque B
+  //   //this.router.navigate(['/detail', { id: hero.id }]);
+  // }
 
   // Ejercicio 24
   // nextPage(): void {
   //   this.heroService.currentPage++;
-  //   this.heroes.length = 0;
+  //   this.heroes = null;
   //   this.start += this.heroService.offset;
   //   this.getHeroes();
   // }
@@ -111,7 +114,7 @@ export class HeroesComponent implements OnInit {
   // Ejercicio 24
   // previousPage(): void {
   //   this.heroService.currentPage--;
-  //   this.heroes.length = 0;
+  //   this.heroes = null;
   //   this.start -= this.heroService.offset;
   //   this.getHeroes();
   // }
@@ -125,5 +128,20 @@ export class HeroesComponent implements OnInit {
   //   this.start = 0;
 
   //   this.getHeroes()
+  // }
+
+  // Ejercicio 24
+  // get currentPage(): number {
+  //   return this.heroService.currentPage;
+  // }
+
+  // Ejercicio 24
+  // get offset(): number {
+  //   return this.heroService.offset;
+  // }
+
+  // Ejercicio 24
+  // get heroesAmount(): number {
+  //   return this.heroService.heroesAmount;
   // }
 }

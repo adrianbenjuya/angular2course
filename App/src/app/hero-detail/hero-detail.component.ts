@@ -22,7 +22,8 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
 
   // Reactive Form
   // Ejercicio 23
-  // heroForm: FormGroup;
+  //heroForm: FormGroup;
+
   nameMsg: string;
   validationNameMsgs: any = {
     required: 'The Name field is required',
@@ -39,8 +40,8 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
   constructor(
     private heroService: HeroService,
     private route: ActivatedRoute,
-    private location: Location
-    /*Ejercicio 23: private fb: FormBuilder*/) {
+    private location: Location,
+    private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -67,7 +68,7 @@ export class HeroDetailComponent implements OnInit/*Ejercicio 22: , AfterViewIni
     //     this.hero = hero;
 
     //     // Reactive forms
-    //     // Ejercicio 23
+    //     //Ejercicio 23
     //     //
     //     // this.heroForm = this.fb.group({
     //     //   id: { value: hero.id, disabled: true },

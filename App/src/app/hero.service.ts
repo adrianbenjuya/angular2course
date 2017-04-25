@@ -3,7 +3,10 @@ import { Headers, Http, Response } from '@angular/http';
 import { AppConfig } from './app.config';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/retryWhen';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/catch';
+//import 'rxjs/add/operator/throw';
 
 import { Hero } from './models/hero';
 
@@ -85,8 +88,8 @@ export class HeroService {
         return this.http.get(url).catch(this.handleError);
     }
 
-    private handleError(error: any): Promise<any> {
+    private handleError(error: any): Observable<any> {
         console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
+        return Observable.throw(error.message || error);
     }
 }
