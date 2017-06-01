@@ -1,6 +1,6 @@
 export class AppConfig {
 
-    public static APP_SERVICE_URL: string = 'http://appserverclon.cloudapp.azure.com/TourOfHeroes/api';
+    public static APP_SERVICE_URL: string = 'http://appserverclon.cloudapp.net/TourOfHeroes/api';
 
     public static TEST_ENVIRONMENT: boolean = false;
 
