@@ -5,39 +5,39 @@
   <div class="row">
     <div class="col-md-12">
       <h2>{{!isCreating ? hero.name + ' details' : 'New Hero'}}</h2>
-      <form class="form-horizontal col-md-12">
+      <form class="form-horizontal" (ngSubmit)="save()" [formGroup]="heroForm" novalidate>
         <div class="col-md-6">
           <div *ngIf="!isCreating" class="form-group">
             <label class="control-label col-md-2" for="id">ID:</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" id="id" readonly [ngModel]="hero.id" name="id">
+              <input type="text" class="form-control" id="id" formControlName="id" />
             </div>
           </div>
           <div class="form-group" [ngClass]="{'has-error': nameMsg}">
             <label class="control-label col-md-2" for="name">Name: *</label>
             <div class="col-md-10">
-              <input #heroNameInput type="text" class="form-control" id="name" placeholder="Name" [(ngModel)]="hero.name" name="name">
+              <input #heroNameInput type="text" class="form-control" id="name" placeholder="Name" formControlName="name" />
               <span class="help-block" *ngIf="nameMsg">{{nameMsg}}</span>
             </div>
           </div>
           <div class="form-group" [ngClass]="{'has-error': descriptionMsg}">
             <label class="control-label col-md-2" for="description">Description:</label>
             <div class="col-md-10">
-              <textarea class="form-control" id="description" placeholder="Description" [(ngModel)]="hero.description" name="description"></textarea>
+              <textarea class="form-control" id="description" placeholder="Description" formControlName="description"></textarea>
               <span class="help-block" *ngIf="descriptionMsg">{{descriptionMsg}}</span>
             </div>
           </div>
-          <img class="thumbnail img-responsive" src="{{hero.image}}" (error)="$event.target.src = './assets/no_hero_img.jpg'">
+          <img class="thumbnail img-responsive" src="{{heroForm.get('image').value}}" (error)="$event.target.src = './assets/no_hero_img.jpg'" />
           <div class="form-group">
             <label class="control-label col-md-2" for="image">Image:</label>
-            <div class="col-md-10">
-              <input type="text" class="form-control" id="image" placeholder="Image URL" [(ngModel)]="hero.image" name="image">
+            <div class="input-group col-md-10">
+              <input type="text" class="form-control" id="image" placeholder="Image URL" formControlName="image" />
             </div>
           </div>
         </div>
         <div class="col-md-6 text-right">
           <button type="button" class="btn btn-default" (click)="location.back()">Back</button>
-          <button type="button" class="btn btn-primary" (click)="save()">Save</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!heroForm.valid">Save</button>
           <loading *ngIf="saveLoading"></loading>
         </div>
       </form>

@@ -9,16 +9,18 @@ import 'rxjs/add/operator/finally';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 
 @Component({
-	selector: 'my-hero-detail',
-	templateUrl: './hero-detail.component.html',
-	styleUrls: ['./hero-detail.component.css']
+	selector: 'hero-details-reactive',
+	templateUrl: './hero-details-reactive.component.html',
+	styleUrls: ['./hero-details-reactive.component.css']
 })
-export class HeroDetailComponent implements OnInit, AfterViewInit {
+export class HeroDetailsReactiveComponent implements OnInit, AfterViewInit {
 
 	hero: Hero;
 	isCreating: boolean = true;
 	error: any;
 	saveLoading: boolean = false;
+
+	heroForm: FormGroup;
 
 	nameMsg: string;
 	validationNameMsgs: any = {
@@ -55,7 +57,20 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
 			)
 			.subscribe(
 			(hero: Hero) => {
+
 				this.hero = hero;
+
+				this.heroForm = this.fb.group({
+				  id: { value: hero.id, disabled: true },
+				  name: [hero.name, [Validators.required, Validators.maxLength(20)]],
+				  description: [hero.description, Validators.maxLength(200)],
+				  image: hero.image
+				});
+
+				const nameControl: AbstractControl = this.heroForm.get('name');
+				const descriptionControl: AbstractControl = this.heroForm.get('description');
+				nameControl.valueChanges.subscribe((v: any) => this.nameMsg = this.setMessage(this.validationNameMsgs, nameControl))
+				descriptionControl.valueChanges.subscribe((v: any) => this.descriptionMsg = this.setMessage(this.validationDescriptionMsgs, descriptionControl))
 			},
 			(err: any) => this.error = err
 			);
@@ -72,33 +87,25 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	save(): void {
-		// Template driven forms
-		this.error = null;
-		if (!this.validateForm()) return;
-		this.saveLoading = true;
-		this.heroService.save(this.hero)
-			.finally(() => this.saveLoading = false)
-			.subscribe(
-			() => this.location.back(),
-			(err: any) => this.error = err
-			)
+	setMessage(validationMsgs: any, control: AbstractControl): string {
+	  if ((control.touched || control.dirty) && control.errors) {
+	    return Object.keys(control.errors).map((key: string) => validationMsgs[key]).join(' ');
+	  }
+	  return '';
 	}
 
-	validateForm(): boolean {
-		this.nameMsg = this.descriptionMsg = '';
-		if (!this.hero.name || !this.hero.name.length) {
-			this.nameMsg += this.validationNameMsgs.required;
+	save(): void {
+		if (this.heroForm.dirty && this.heroForm.valid) {
+		  this.error = null;
+		  this.saveLoading = true;
+		  let hero: any = Object.assign({}, this.hero, this.heroForm.value);
+		  this.heroService.save(hero)
+		  .finally(() => this.saveLoading = false)
+		  .subscribe(
+		    () => this.location.back(),
+		    (err: any) => this.error = err
+		  )
 		}
-		else if (this.hero.name.length > 20) {
-			this.nameMsg += this.nameMsg.length ? ' ' : '' + this.validationNameMsgs.maxlength;
-		}
-
-		if (this.hero.description && this.hero.description.length > 200) {
-			this.descriptionMsg += this.validationDescriptionMsgs.maxlength;
-		}
-
-		return !this.nameMsg.length && !this.descriptionMsg.length;
 	}
 
 	focusInput(): void {

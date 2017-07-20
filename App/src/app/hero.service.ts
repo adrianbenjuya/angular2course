@@ -18,7 +18,7 @@ export class HeroService {
 
     public currentPage: number = 1;
     public heroesAmount: number;
-    public readonly offset: number = 3;
+    public readonly offset: number = 5;
 
     constructor(private http: Http) { }
 

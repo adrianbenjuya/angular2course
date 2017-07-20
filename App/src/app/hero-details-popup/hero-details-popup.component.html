@@ -1,26 +1,6 @@
 <!-- Enfoque 1 -->
-<div *ngIf="_show" id="overlay"></div>
-<div *ngIf="_show" class="modal fade in" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="close()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{_hero.name}}</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{_hero.description || 'No description yet'}}</p>
-        <img *ngIf="_hero.image && _hero.image.length" style="width: 100%" src="{{_hero.image}}" />
-      </div>
-      <div class="modal-footer">
-        <button (click)="close()" type="button" class="btn btn-default">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Enfoque 2 -->
-<!--<div *ngIf="show" id="overlay"></div>
-<div *ngIf="show" class="modal fade in" tabindex="-1" role="dialog">
+<div *ngIf="hero" id="overlay"></div>
+<div *ngIf="hero" class="modal fade in" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -29,29 +9,11 @@
       </div>
       <div class="modal-body">
         <p>{{hero.description || 'No description yet'}}</p>
+        <img *ngIf="hero.image && hero.image.length" src="{{hero.image}}" (error)="$event.target.src = './assets/no_hero_img.jpg'">
       </div>
       <div class="modal-footer">
         <button (click)="close()" type="button" class="btn btn-default">Close</button>
       </div>
     </div>
   </div>
-</div>-->
-
-<!-- Enfoque 3 -->
-<!--<div #overlay [class.show]="_show" id="overlay"></div>
-<div #popup class="modal fade" [class.in]="_show" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="close()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{_hero?.name}}</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{_hero?.description || 'No description yet'}}</p>
-      </div>
-      <div class="modal-footer">
-        <button (click)="close()" type="button" class="btn btn-default">Close</button>
-      </div>
-    </div>
-  </div>
-</div>-->
+</div>

@@ -4,36 +4,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { HeroDetailsPopupComponent } from './hero-details-popup/hero-details-popup.component';
-import { LoadingComponent } from './loading/loading.component';
+import { HeroDetailsReactiveComponent } from "app/hero-details-reactive/hero-details-reactive.component";
 
 const routes: Routes = [
   {
     path: 'dashboard',
-    redirectTo: '',
-    pathMatch: 'full'
+    component: DashboardComponent
   },
   {
     path: '',
-    component: DashboardComponent
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
-
-  // Ejercicio 21
-  // {
-  //   // Enfoque A
-  //   path: 'detail/:id',
-  //   // Enfoque B
-  //   //path: 'detail',
-  //   component: HeroDetailComponent
-  // },
-
-  // Ejercicio 20
-  // {
-  //   path: 'create',
-  //   component: HeroDetailComponent
-  // },
-
-  // Ejercicio 14
+  {
+    path: 'edit/:id',
+    component: HeroDetailsReactiveComponent
+  },
+  {
+    path: 'create',
+    component: HeroDetailsReactiveComponent
+  },
   {
     path: 'heroes',
     component: HeroesComponent
@@ -45,5 +35,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-export const routedComponents = [DashboardComponent, HeroesComponent, HeroDetailComponent, HeroDetailsPopupComponent, LoadingComponent];
