@@ -53,7 +53,5 @@ export class PaginatorComponent implements OnInit {
 			pages.push(p);
 
 		this.pageList = pages;
-
-		// this.ref.detectChanges();
 	}
 }

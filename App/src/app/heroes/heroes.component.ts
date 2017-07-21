@@ -27,13 +27,6 @@ export class HeroesComponent implements OnInit {
 	getHeroes(): void {
 		this.heroes = undefined;
 
-		// this.heroService.getHeroes().subscribe(
-		// 	(heroes: Hero[]) => {
-		// 		this.heroes = heroes;
-		// 		this.auxHeroes = this.heroes.slice();
-		// 	}
-		// );
-
 		this.heroService.getHeroes(this.start, this.orderby, this.orderdir).subscribe(
 			(heroes: Hero[]) => {
 				this.heroes = heroes;
@@ -43,9 +36,6 @@ export class HeroesComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		// Ejercicio 24
-		//this.start = (this.heroService.currentPage - 1) * this.heroService.offset;
-
 		this.getHeroes();
 	}
 
@@ -88,24 +78,10 @@ export class HeroesComponent implements OnInit {
 			);
 	}
 
-	// nextPage(): void {
-	// 	this.heroService.currentPage++;
-	// 	this.heroes = null;
-	// 	this.start += this.heroService.offset;
-	// 	this.getHeroes();
-	// }
-
-	// previousPage(): void {
-	// 	this.heroService.currentPage--;
-	// 	this.heroes = null;
-	// 	this.start -= this.heroService.offset;
-	// 	this.getHeroes();
-	// }
-
 	changePage(page: number): void {
 		this.heroService.currentPage = page;
 		this.heroes = null;
-		this.start = this.offset * (page - 1);
+		this.start = this.heroService.offset * (page - 1);
 		this.getHeroes();
 	}
 
@@ -119,19 +95,7 @@ export class HeroesComponent implements OnInit {
 		this.getHeroes()
 	}
 
-	get currentPage(): number {
-		return this.heroService.currentPage;
-	}
-
-	get offset(): number {
-		return this.heroService.offset;
-	}
-
-	get heroesAmount(): number {
-		return this.heroService.heroesAmount;
-	}
-
 	get pageCount(): number {
-		return Math.ceil(this.heroesAmount / this.offset);
+		return Math.ceil(this.heroService.heroesAmount / this.heroService.offset);
 	}
 }
