@@ -72,9 +72,15 @@ namespace TourOfHeroes.Controllers
             return Ok(DTOFactory(hero));
         }
 
+<<<<<<< HEAD
         // PUT: api/Heroes/Edit/5
         [ResponseType(typeof(void)), HttpPost]
         public IHttpActionResult Edit(int id, Hero hero)
+=======
+        // POST: api/Heroes/5
+        [ResponseType(typeof(void)), HttpPost]
+        public IHttpActionResult PutHero(int id, Hero hero)
+>>>>>>> 51c35f1c2f3b51890e2fe1ce7637ee1464984fa0
         {
             if (!ModelState.IsValid)
             {
@@ -122,9 +128,15 @@ namespace TourOfHeroes.Controllers
             return CreatedAtRoute("DefaultApi", new { id = hero.Id }, hero);
         }
 
+<<<<<<< HEAD
         // DELETE: api/Heroes/Delete/5
         [ResponseType(typeof(Hero)), HttpGet]
         public IHttpActionResult Delete(int id)
+=======
+        // DELETE: api/Heroes/5
+        [ResponseType(typeof(Hero)), HttpGet]
+        public IHttpActionResult DeleteHero(int id)
+>>>>>>> 51c35f1c2f3b51890e2fe1ce7637ee1464984fa0
         {
             Hero hero = db.Heroes.Find(id);
             if (hero == null)
