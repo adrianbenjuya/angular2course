@@ -16,9 +16,9 @@
             </button>
 
             <!-- Paginador -->
-            <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + offset >= heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            <!-- <button (click)="nextPage()" type="button" class="btn btn-secondary pull-right" [disabled]="start + offset >= heroesAmount"><span class="glyphicon glyphicon-chevron-right"></span></button>
             <button (click)="previousPage()" type="button" class="btn btn-secondary pull-right" [disabled]="!start"><span class="glyphicon glyphicon-chevron-left"></span></button>
-            <h4 class="pull-right">Page {{currentPage}}</h4>
+            <h4 class="pull-right">Page {{currentPage}}</h4> -->
           </div>
         </div>
       </div>
@@ -74,6 +74,12 @@
 
         <loading *ngIf="!heroes"></loading>
 
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <paginator [pageCount]="pageCount" (currentPageChanged)="changePage($event)"></paginator>
       </div>
     </div>
   </div>

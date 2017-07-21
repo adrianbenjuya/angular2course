@@ -19,6 +19,7 @@ import { LoadingComponent } from "app/shared/loading/loading.component";
 import { MarkDirective } from "app/shared/mark/mark.directive";
 import { FilterPipe } from "app/shared/filter/filter.pipe";
 import { HeroDetailsReactiveComponent } from "app/hero-details-reactive/hero-details-reactive.component";
+import { PaginatorComponent } from "app/shared/paginator/paginator.component";
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { HeroDetailsReactiveComponent } from "app/hero-details-reactive/hero-det
   ],
   declarations: [
     AppComponent,
+    PaginatorComponent,
     HeroTileComponent,
     FilterPipe,
     MarkDirective,

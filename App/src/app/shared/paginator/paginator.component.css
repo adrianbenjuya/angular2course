@@ -1,0 +1,15 @@
+.pagination {
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.09);
+}
+
+.pagination li a {
+    cursor: pointer;
+    color: #3c4a5a;
+    background: #f6f6f6;
+}
+
+.pagination li.active a {
+    background: #252d37;
+    color: white;
+    border-color: #252d37;
+}

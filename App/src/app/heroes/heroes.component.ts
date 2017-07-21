@@ -15,7 +15,6 @@ export class HeroesComponent implements OnInit {
 	heroes: Hero[];
 	searchText: string;
 	auxHeroes: Hero[];
-	heroesLength: number;
 
 	start: number = 0;
 	orderby: string = 'id';
@@ -39,7 +38,6 @@ export class HeroesComponent implements OnInit {
 			(heroes: Hero[]) => {
 				this.heroes = heroes;
 				this.auxHeroes = this.heroes.slice();
-				this.heroesLength = this.heroes.length;
 			}
 		);
 	}
@@ -90,17 +88,24 @@ export class HeroesComponent implements OnInit {
 			);
 	}
 
-	nextPage(): void {
-		this.heroService.currentPage++;
-		this.heroes = null;
-		this.start += this.heroService.offset;
-		this.getHeroes();
-	}
+	// nextPage(): void {
+	// 	this.heroService.currentPage++;
+	// 	this.heroes = null;
+	// 	this.start += this.heroService.offset;
+	// 	this.getHeroes();
+	// }
 
-	previousPage(): void {
-		this.heroService.currentPage--;
+	// previousPage(): void {
+	// 	this.heroService.currentPage--;
+	// 	this.heroes = null;
+	// 	this.start -= this.heroService.offset;
+	// 	this.getHeroes();
+	// }
+
+	changePage(page: number): void {
+		this.heroService.currentPage = page;
 		this.heroes = null;
-		this.start -= this.heroService.offset;
+		this.start = this.offset * (page - 1);
 		this.getHeroes();
 	}
 
@@ -124,5 +129,9 @@ export class HeroesComponent implements OnInit {
 
 	get heroesAmount(): number {
 		return this.heroService.heroesAmount;
+	}
+
+	get pageCount(): number {
+		return Math.ceil(this.heroesAmount / this.offset);
 	}
 }
