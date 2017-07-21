@@ -27,7 +27,7 @@ import { PaginatorComponent } from "app/shared/paginator/paginator.component";
     FormsModule,
     AppRoutingModule,
     HttpModule,
-    ConfirmModule
+    ConfirmModule,
   ],
   declarations: [
     AppComponent,

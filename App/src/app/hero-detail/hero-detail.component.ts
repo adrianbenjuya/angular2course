@@ -104,4 +104,10 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
 	focusInput(): void {
 		this.heroNameInput.first.nativeElement.focus();
 	}
+
+	set birthdate(value: string) {
+		if (value && value.length) {
+			this.hero.birthdate = new Date(value);
+		}
+	}
 }
