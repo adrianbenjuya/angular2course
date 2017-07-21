@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Hero } from "app/models/hero";
-declare var $: any;
 
 @Component({
     selector: 'hero-details-popup',
@@ -8,24 +7,7 @@ declare var $: any;
     styleUrls: ['./hero-details-popup.component.css']
 })
 export class HeroDetailsPopupComponent implements OnInit {
-
-    private _hero: Hero;
-    private _show: boolean = false;
-
-    // Enfoque 1
-    @Input() set hero(value: Hero) {
-        this._hero = value;
-        this._show = this._hero != null;
-    }
-
-    // Enfoque 2
-    // @Input() hero: Hero;
-
-    // private get show(): boolean {
-    //     return this.hero != null;
-    // }
-
-    @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
+    @Input() hero: Hero;
 
     constructor() { }
 
@@ -33,7 +15,7 @@ export class HeroDetailsPopupComponent implements OnInit {
 
     }
 
-    private close(): void {
-        this.onClose.emit();
+    close(): void {
+        this.hero = null;
     }
 }

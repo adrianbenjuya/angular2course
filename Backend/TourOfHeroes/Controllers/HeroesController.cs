@@ -72,9 +72,9 @@ namespace TourOfHeroes.Controllers
             return Ok(DTOFactory(hero));
         }
 
-        // POST: api/Heroes/5
+        // PUT: api/Heroes/Edit/5
         [ResponseType(typeof(void)), HttpPost]
-        public IHttpActionResult PutHero(int id, Hero hero)
+        public IHttpActionResult Edit(int id, Hero hero)
         {
             if (!ModelState.IsValid)
             {
@@ -122,9 +122,9 @@ namespace TourOfHeroes.Controllers
             return CreatedAtRoute("DefaultApi", new { id = hero.Id }, hero);
         }
 
-        // DELETE: api/Heroes/5
+        // DELETE: api/Heroes/Delete/5
         [ResponseType(typeof(Hero)), HttpGet]
-        public IHttpActionResult DeleteHero(int id)
+        public IHttpActionResult Delete(int id)
         {
             Hero hero = db.Heroes.Find(id);
             if (hero == null)

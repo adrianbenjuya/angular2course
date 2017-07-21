@@ -14,3 +14,7 @@ h2 {
 .pointer {
   cursor: pointer;
 }
+
+mark {
+  background: yellow;
+}
