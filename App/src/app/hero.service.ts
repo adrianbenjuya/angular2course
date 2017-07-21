@@ -54,10 +54,10 @@ export class HeroService {
 
     delete(heroId: number): Observable<Response> {
 
-        let url = AppConfig.HEROES_URL + heroId;
+        let url = AppConfig.HEROES_URL + 'Delete/' + heroId;
 
         return this.http
-            .delete(url, { headers: this.jsonHeader })
+            .get(url, { headers: this.jsonHeader })
             .catch(this.handleError);
     }
 
@@ -73,10 +73,10 @@ export class HeroService {
     // Update existing Hero
     private put(hero: Hero): Observable<Hero> {
 
-        let url = AppConfig.HEROES_URL + hero.id;
+        let url = AppConfig.HEROES_URL + 'Edit/' + hero.id;
 
         return this.http
-            .put(url, JSON.stringify(hero), { headers: this.jsonHeader })
+            .post(url, JSON.stringify(hero), { headers: this.jsonHeader })
             .map((r: Response) => Hero.fromJson(r))
             .catch(this.handleError);
     }
