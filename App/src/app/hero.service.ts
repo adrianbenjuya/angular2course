@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { AppConfig } from './app.config';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/retryWhen';
 import 'rxjs/add/operator/map';
@@ -9,6 +8,7 @@ import 'rxjs/add/operator/catch';
 //import 'rxjs/add/operator/throw';
 
 import { Hero } from './models/hero';
+import { environment } from "environments/environment";
 
 @Injectable()
 export class HeroService {
@@ -23,7 +23,7 @@ export class HeroService {
     constructor(private http: Http) { }
 
     getHeroes(start?: number, orderby?: string, orderdir?: string): Observable<Hero[]> {
-        let url: string = AppConfig.HEROES_URL;
+        let url: string = environment.api;
         if (start !== undefined && orderby !== undefined && orderdir !== undefined) {
             url += `?start=${start}&offset=${this.offset}&orderby=${orderby}&orderdir=${orderdir}`;
         }
@@ -39,7 +39,7 @@ export class HeroService {
     }
 
     getHero(id: number): Observable<Hero> {
-        return this.http.get(AppConfig.HEROES_URL + 'get/' + id)
+        return this.http.get(environment.api + 'get/' + id)
             .map(response => Hero.fromJson(response.json()))
             //.retryWhen((errors: Observable<any>) => errors.delay(2000))
             .catch(this.handleError);
@@ -54,7 +54,7 @@ export class HeroService {
 
     delete(heroId: number): Observable<Response> {
 
-        let url = AppConfig.HEROES_URL + 'Delete/' + heroId;
+        let url = environment.api + 'Delete/' + heroId;
 
         return this.http
             .get(url, { headers: this.jsonHeader })
@@ -65,7 +65,7 @@ export class HeroService {
     private post(hero: Hero): Observable<Hero> {
 
         return this.http
-            .post(AppConfig.HEROES_URL, JSON.stringify(hero), { headers: this.jsonHeader })
+            .post(environment.api, JSON.stringify(hero), { headers: this.jsonHeader })
             .map((r: Response) => Hero.fromJson(r))
             .catch(this.handleError);
     }
@@ -73,7 +73,7 @@ export class HeroService {
     // Update existing Hero
     private put(hero: Hero): Observable<Hero> {
 
-        let url = AppConfig.HEROES_URL + 'Edit/' + hero.id;
+        let url = environment.api + 'Edit/' + hero.id;
 
         return this.http
             .post(url, JSON.stringify(hero), { headers: this.jsonHeader })
@@ -84,7 +84,7 @@ export class HeroService {
     vote(hero: Hero): Observable<any> {
         hero.votes++;
         hero.alreadyVoted = true;
-        let url: string = AppConfig.HEROES_URL + 'vote/' + hero.id;
+        let url: string = environment.api + 'vote/' + hero.id;
         return this.http.get(url).catch(this.handleError);
     }
 
