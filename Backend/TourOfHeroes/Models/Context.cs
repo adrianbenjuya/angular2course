@@ -29,47 +29,62 @@ namespace TourOfHeroes.Models
                     new Hero
                     {
                         Name = "Spiderman",
-                        Image = "https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-zlh902_0530d760.png?region=0%2C0%2C374%2C369"
+                        Image = "https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-zlh902_0530d760.png?region=0%2C0%2C374%2C369",
+                        Birthdate = new DateTime(1962, 8, 10)
                     },
                     new Hero
                     {
                         Name = "Wonder Woman",
-                        Image = "https://upload.wikimedia.org/wikipedia/en/b/b5/WonderWomanNew52.jpg"
+                        Image = "https://upload.wikimedia.org/wikipedia/en/b/b5/WonderWomanNew52.jpg",
+                        Birthdate = new DateTime(1941, 12, 19)
                     },
                     new Hero
                     {
                         Name = "Batman",
-                        Image = "https://static-latercera-qa.s3.amazonaws.com/wp-content/uploads/sites/7/20150429/2108594.jpg"
+                        Image = "https://static-latercera-qa.s3.amazonaws.com/wp-content/uploads/sites/7/20150429/2108594.jpg",
+                        Birthdate = new DateTime(1939, 5, 17)
                     },
                     new Hero
                     {
                         Name = "Iron Man",
-                        Image = "https://www.google.com.ar/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwiXwLLJpqbSAhUH44MKHU6cBTQQjBwIBA&url=http%3A%2F%2Fcartoonbros.com%2Fwp-content%2Fuploads%2F2016%2F07%2FIron-Man-2.png&psig=AFQjCNG0uliA6jTG8U2f_l3c7rJ_l5xuPQ&ust=1487942135903085"
+                        Image = "https://www.google.com.ar/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwiXwLLJpqbSAhUH44MKHU6cBTQQjBwIBA&url=http%3A%2F%2Fcartoonbros.com%2Fwp-content%2Fuploads%2F2016%2F07%2FIron-Man-2.png&psig=AFQjCNG0uliA6jTG8U2f_l3c7rJ_l5xuPQ&ust=1487942135903085",
+                        Birthdate = new DateTime(1963, 3, 20)
                     },
                     new Hero
                     {
                         Name = "Superman",
-                        Image = "http://www.fortalezadelasoledad.com/imagenes/2016/05/06/Superman-Rebirth-Variant.jpg"
+                        Image = "http://www.fortalezadelasoledad.com/imagenes/2016/05/06/Superman-Rebirth-Variant.jpg",
+                        Birthdate = new DateTime(1938, 6, 5)
                     },
                     new Hero
                     {
                         Name = "Chuck Norris",
-                        Image = "https://www.google.com.ar/search?q=chuck+norris&espv=2&biw=1366&bih=638&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjE1OHopabSAhWK54MKHXzHCb8Q_AUIBigB#imgrc=5PJxeoVtag976M:"
+                        Image = "https://www.google.com.ar/search?q=chuck+norris&espv=2&biw=1366&bih=638&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjE1OHopabSAhWK54MKHXzHCb8Q_AUIBigB#imgrc=5PJxeoVtag976M:",
+                        Birthdate = new DateTime(1940, 3, 10)
                     },
                     new Hero
                     {
                         Name = "Thor",
-                        Image = "https://www.google.com.ar/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwi7q9nhpabSAhVK2oMKHW0ABLUQjBwIBA&url=http%3A%2F%2Fstatic1.comicvine.com%2Fuploads%2Foriginal%2F11119%2F111198813%2F5111937-4237037226-34009.png&psig=AFQjCNFg1B5pGHO_26mzQFPHEIxc-sSDwQ&ust=1487941918095359"
+                        Image = "https://www.google.com.ar/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwi7q9nhpabSAhVK2oMKHW0ABLUQjBwIBA&url=http%3A%2F%2Fstatic1.comicvine.com%2Fuploads%2Foriginal%2F11119%2F111198813%2F5111937-4237037226-34009.png&psig=AFQjCNFg1B5pGHO_26mzQFPHEIxc-sSDwQ&ust=1487941918095359",
+                        Birthdate = new DateTime(1962, 8, 24)
                     },
                     new Hero
                     {
                         Name = "Cyclops",
-                        Image = "http://vignette2.wikia.nocookie.net/avengersalliance/images/6/69/Cyclops_Dialogue_3.png/revision/latest?cb=20120921004412"
+                        Image = "http://vignette2.wikia.nocookie.net/avengersalliance/images/6/69/Cyclops_Dialogue_3.png/revision/latest?cb=20120921004412",
+                        Birthdate = new DateTime(1963, 1, 1)
                     },
                     new Hero
                     {
                         Name = "Luke Skywalker",
-                        Image = "http://www.pulsourbano.com.ar/wp-content/uploads/Luke-Skywalker.jpg"
+                        Image = "http://www.pulsourbano.com.ar/wp-content/uploads/Luke-Skywalker.jpg",
+                        Birthdate = new DateTime(1977, 5, 25)
+                    },
+                    new Hero
+                    {
+                        Name = "Darth Vader",
+                        Image = "https://www.sideshowtoy.com/wp-content/uploads/2013/06/100076-product-feature31-740x448.jpg",
+                        Birthdate = new DateTime(1977, 5, 25)
                     }
                 };
 

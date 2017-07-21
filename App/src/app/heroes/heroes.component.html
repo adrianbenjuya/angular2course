@@ -8,7 +8,7 @@
             <label class="control-label col-md-2" for="search">Search:</label>
             <div class="col-md-10">
               <input type="text" class="form-control" id="search" (input)="search($event.target.value)" />
-            </div> 
+            </div>
           </div>
           <div class="col-md-8">
             <button routerLink="/create" type="button" class="btn btn-primary pull-right">
@@ -28,38 +28,36 @@
               <th class="col-md-2">
                 <a href="#" (click)="orderBy($event, 'id')">#ID <span *ngIf="orderby === 'id'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a>
               </th>
-              <th class="col-md-6">
+              <th class="col-md-4">
                 <a href="#" (click)="orderBy($event, 'name')">Name <span *ngIf="orderby === 'name'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a>
+              </th>
+              <th class="col-md-2">
+                <a href="#" (click)="orderBy($event, 'date')">Birthdate <span *ngIf="orderby === 'date'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a>
               </th>
               <th class="col-md-2">
                 <a href="#" (click)="orderBy($event, 'votes')">Votes <span *ngIf="orderby === 'votes'" class="glyphicon glyphicon-arrow-{{orderdir === 'asc' ? 'up' : 'down'}}"></span></a>
               </th>
 
-              <th class="col-md-2">Actions</th></tr>
+              <th class="col-md-2">Actions</th>
+            </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let hero of heroes | filter : searchText : 'name'">
+            <tr *ngFor="let hero of heroes">
 
               <td class="col-md-2">#{{hero.id}}</td>
-              <td class="col-md-6" [mark]="searchText">{{hero.name}}</td>
+              <td class="col-md-4" [mark]="searchText">{{hero.name}}</td>
+              <td class="col-md-2">{{(hero.birthdate | date: 'dd/MM/yyyy') || 'Not defined'}}</td>
               <td class="col-md-2">
                 <span>{{hero.votes}}</span>
-                <button type="button" class="btn btn-secondary" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                <button type="button" class="btn btn-default" [disabled]="hero.alreadyVoted" (click)="vote(hero)"><span class="glyphicon glyphicon-thumbs-up"></span></button>
               </td>
               <td class="col-md-2">
-                <button type="button"
-                        class="btn btn-info"
-                        title="Edit"
-                        [routerLink]="['/edit', hero.id]">
+                <button type="button" class="btn btn-info" title="Edit" [routerLink]="['/edit', hero.id]">
                         <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button type="button"
-                        class="btn btn-danger"
-                        mwlConfirm
-                        title="Delete"
-                        message="Are you sure you want to delele {{hero.name}}?"
-                        (confirm)="deleteHero(hero)">
+                <button type="button" class="btn btn-danger" mwlConfirm title="Delete" message="Are you sure you want to delele {{hero.name}}?"
+                  (confirm)="deleteHero(hero)">
                         <span class="glyphicon glyphicon-trash"></span>
                 </button>
               </td>

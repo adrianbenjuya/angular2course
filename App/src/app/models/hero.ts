@@ -5,6 +5,7 @@ export class Hero {
     votes: number = 0;
     description: string;
     alreadyVoted: boolean = false;
+    birthdate: Date;
 
     public static fromJsonArray(json: any): Hero[] {
         let heroes: Hero[] = new Array<Hero>();
@@ -16,6 +17,7 @@ export class Hero {
           hero.image = item.Image;
           hero.votes = item.Votes;
           hero.alreadyVoted = item.AlreadyVoted;
+          hero.birthdate = item.Birthdate ? new Date(item.Birthdate) : null;
           heroes.push(hero);
         }
         return heroes;

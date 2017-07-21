@@ -17,7 +17,6 @@ import { HeroDetailsPopupComponent } from "app/hero-details-popup/hero-details-p
 import { HeroDetailComponent } from "app/hero-detail/hero-detail.component";
 import { LoadingComponent } from "app/shared/loading/loading.component";
 import { MarkDirective } from "app/shared/mark/mark.directive";
-import { FilterPipe } from "app/shared/filter/filter.pipe";
 import { HeroDetailsReactiveComponent } from "app/hero-details-reactive/hero-details-reactive.component";
 import { PaginatorComponent } from "app/shared/paginator/paginator.component";
 
@@ -34,7 +33,6 @@ import { PaginatorComponent } from "app/shared/paginator/paginator.component";
     AppComponent,
     PaginatorComponent,
     HeroTileComponent,
-    FilterPipe,
     MarkDirective,
     DashboardComponent,
     HeroesComponent,

@@ -39,17 +39,16 @@ export class HeroesComponent implements OnInit {
 		this.getHeroes();
 	}
 
-
 	search(searchText: string): void {
 		this.searchText = searchText;
-		// if (searchText && searchText.length) {
-		// 	this.heroes = this.auxHeroes.filter(
-		// 		(hero: Hero) => hero.name.toLocaleLowerCase().trim().includes(searchText.toLocaleLowerCase().trim())
-		// 	);
-		// }
-		// else {
-		// 	this.heroes = this.auxHeroes;
-		// }
+		if (searchText && searchText.length) {
+			this.heroes = this.auxHeroes.filter(
+				(hero: Hero) => hero.name.toLocaleLowerCase().trim().includes(searchText.toLocaleLowerCase().trim())
+			);
+		}
+		else {
+			this.heroes = this.auxHeroes;
+		}
 	}
 
 	vote(hero: Hero): void {

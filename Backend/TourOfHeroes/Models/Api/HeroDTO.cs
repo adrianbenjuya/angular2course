@@ -18,5 +18,7 @@ namespace TourOfHeroes.Models.Api
         public int Votes { get; set; }
 
         public bool AlreadyVoted { get; set; }
+
+        public DateTime? Birthdate { get; set; }
     }
 }

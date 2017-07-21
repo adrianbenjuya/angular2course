@@ -27,6 +27,7 @@
               <span class="help-block" *ngIf="descriptionMsg">{{descriptionMsg}}</span>
             </div>
           </div>
+          
           <img class="thumbnail img-responsive" src="{{hero.image}}" (error)="$event.target.src = './assets/no_hero_img.jpg'">
           <div class="form-group">
             <label class="control-label col-md-2" for="image">Image:</label>

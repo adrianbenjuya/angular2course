@@ -43,6 +43,14 @@ namespace TourOfHeroes.Controllers
                     heroesDb = db.Heroes.OrderByDescending(h => h.Id);
                     break;
 
+                case "date&desc":
+                    heroesDb = db.Heroes.OrderByDescending(h => h.Birthdate);
+                    break;
+
+                case "date&asc":
+                    heroesDb = db.Heroes.OrderBy(h => h.Birthdate);
+                    break;
+
                 case "id&asc":
                 default:
                     heroesDb = db.Heroes.OrderBy(h => h.Id);
@@ -180,7 +188,8 @@ namespace TourOfHeroes.Controllers
                 Description = hero.Description,
                 Image = hero.Image,
                 Votes = votes.Count(),
-                AlreadyVoted = votes.FirstOrDefault(v => v.IPVote == ip) != null
+                AlreadyVoted = votes.FirstOrDefault(v => v.IPVote == ip) != null,
+                Birthdate = hero.Birthdate
             };
 
             return dto;

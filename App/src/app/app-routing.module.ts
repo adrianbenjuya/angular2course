@@ -18,11 +18,11 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: HeroDetailsReactiveComponent
+    component: HeroDetailComponent
   },
   {
     path: 'create',
-    component: HeroDetailsReactiveComponent
+    component: HeroDetailComponent
   },
   {
     path: 'heroes',

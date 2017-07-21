@@ -35,7 +35,7 @@ export class PaginatorComponent implements OnInit {
 		if (page > 1 && page > this._pageCount)
 			return;
 
-		if (this.currentPage == page)
+		if (this._currPage == page)
 			return;
 
 		this._currPage = page;
