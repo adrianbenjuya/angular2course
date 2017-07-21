@@ -1,14 +1,14 @@
-import { AppPage } from './app.po';
+import { UpgradeProjectPage } from './app.po';
 
-describe('app App', () => {
-  let page: AppPage;
+describe('upgrade-project App', () => {
+  let page: UpgradeProjectPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new UpgradeProjectPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });

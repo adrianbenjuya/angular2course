@@ -72,8 +72,8 @@ namespace TourOfHeroes.Controllers
             return Ok(DTOFactory(hero));
         }
 
-        // PUT: api/Heroes/5
-        [ResponseType(typeof(void))]
+        // POST: api/Heroes/5
+        [ResponseType(typeof(void)), HttpPost]
         public IHttpActionResult PutHero(int id, Hero hero)
         {
             if (!ModelState.IsValid)
@@ -123,7 +123,7 @@ namespace TourOfHeroes.Controllers
         }
 
         // DELETE: api/Heroes/5
-        [ResponseType(typeof(Hero))]
+        [ResponseType(typeof(Hero)), HttpGet]
         public IHttpActionResult DeleteHero(int id)
         {
             Hero hero = db.Heroes.Find(id);
