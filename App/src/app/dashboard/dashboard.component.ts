@@ -11,24 +11,26 @@ import { HeroService } from '../hero.service';
 })
 export class DashboardComponent implements OnInit {
 
-    heroes: Hero[];
-    allowVotes: boolean = true;
+    constructor(
+        private heroService: HeroService
+    ) {}
 
-    constructor(private router: Router,
-                private heroService: HeroService) {
-    }
+    heroes: Hero[];
+    heroesTop: Hero[];
+    currentHero: Hero;
+    allowVotes: Boolean = true;
 
     ngOnInit(): void {
         this.heroService.getHeroes().subscribe(
             heroes => {
                 this.heroes = heroes;
+                console.log(this.heroes);
                 this.orderHeroes();
-                this.heroes = this.heroes.slice(0, 3);
             }
         )
     }
-
-    orderHeroes(): void {
+    
+    orderHeroes(): void{
         this.heroes.sort((a, b) => {
             if (a.votes < b.votes) return 1;
             else if (a.votes > b.votes) return -1;
@@ -36,5 +38,6 @@ export class DashboardComponent implements OnInit {
             else if (a.name > b.name) return 1;
             else return 0;
         });
+        this.heroesTop = this.heroes.slice(0,3);
     }
 }
