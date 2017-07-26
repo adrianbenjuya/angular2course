@@ -1,34 +1,26 @@
-#overlay {
-    background: black;
-    /* Enfoque 1 y 2 */
-    opacity: .6;
-    z-index: 1000;
-    /* Enfoque 3 */
-    /*opacity: 0;
-    transition: all .3s;*/
-    right: 0;
-    bottom: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-#overlay.show {
-    opacity: .6;
-    z-index: 1000;
-}
-
 .modal {
-    display: block;
-    z-index: 0;
+    bottom: auto;
+    left: 25%;
+    right: auto;
+    top: 50px;
+    width: 50%;
 }
-
 .modal.in {
-    z-index: 1050;
+    display: block!important;
 }
-
-.modal img {
-    margin: auto;
-    max-width: 100%;
-    max-height: 200px;
+.modal-dialog {
+    margin: 0 auto;
+    width: 100%;
+}
+.modal-bg {
+    background: rgba(0,0,0, 0.75);
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.modal.in ~ .modal-bg {
+    display: block;
 }
