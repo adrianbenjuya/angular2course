@@ -6,6 +6,7 @@ export class Hero {
     description: string;
     alreadyVoted: boolean = false;
     birthdate: Date;
+    voting: String = "";
 
     public static fromJsonArray(json: any): Hero[] {
         let heroes: Hero[] = new Array<Hero>();

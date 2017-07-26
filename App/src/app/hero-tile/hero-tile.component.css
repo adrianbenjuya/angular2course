@@ -1,13 +1,39 @@
-.gold {
-    background: gold !important;
+.hero {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #666;
+    cursor: pointer;
+    font-size: 1.3em;
+    text-align: center;
 }
 
-.silver {
-    background: silver !important;
+.hero.down {
+    background: rgba(255, 0, 0, 0.15);
 }
 
-.bronze {
-    background: #cd7f32 !important;
+.hero.up {
+    background: rgba(0, 255, 0, 0.15);
+}
+
+.hero-data {
+    margin: 0;
+    padding: 2em 1em;
+}
+
+.hero .fa-trophy {
+    font-size: 3em;
+}
+
+.hero.bronze .fa-trophy {
+    color: brown;
+}
+
+.hero.gold .fa-trophy {
+    color: gold;
+}
+
+.hero.silver .fa-trophy {
+    color: silver;
 }
 
 .thumbnail:hover {
@@ -24,14 +50,24 @@
     margin-bottom: 0;
 }
 
-.votes {
-    padding: 10px 25px;
+.hero .buttons {
+    margin: 0;
 }
 
-.votes button:first-child {
-    float: left;
+.hero .buttons .btn {
+    border: 0;
+    padding: 1em 1em;
 }
 
-.votes button:last-child {
-    float: right;
+.hero .buttons .btn-primary {
+    border-radius: 0 0 1px 0;
+}
+
+.hero .buttons .btn-default {
+    background: #efefef;
+    border-radius: 0 0 0 1px;
+}
+
+.hero .buttons .btn-default:not([disabled]):hover {
+    background: #dadada;
 }
