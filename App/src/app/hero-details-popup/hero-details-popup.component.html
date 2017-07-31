@@ -1,19 +1,23 @@
-<!-- Enfoque 1 -->
-<div *ngIf="hero" id="overlay"></div>
-<div *ngIf="hero" class="modal fade in" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button (click)="close()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{hero.name}}</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{hero.description || 'No description yet'}}</p>
-        <img *ngIf="hero.image && hero.image.length" src="{{hero.image}}" (error)="$event.target.src = './assets/no_hero_img.jpg'">
-      </div>
-      <div class="modal-footer">
-        <button (click)="close()" type="button" class="btn btn-default">Close</button>
-      </div>
+<div class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" (click)="closeHeroModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+                <h4 class="modal-title">{{hero?.name}}</h4>
+            </div>
+            <div class="modal-body">
+                <img class="img-responsive center-block" src="{{hero?.image}}" />
+                <p>{{hero?.description}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="closeHeroModal()">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
-  </div>
+    <!-- /.modal-dialog -->
 </div>
+<!-- /.modal -->
+<div class="modal-bg" (click)="closeHeroModal()"></div>

@@ -1,27 +1,20 @@
 <div class="row">
-  <div class="col-md-12">
-    <h2>Top heroes!</h2>
-  </div>
-  <loading *ngIf="!heroes"></loading>
-  <div *ngIf="heroes" class="col-md-12">
-    <hero-tile *ngFor="let hero of heroes; let first = first; let last = last"
-               [hero]="hero"
-               [first]="first"
-               [last]="last" 
-               [allowVotes]="allowVotes"
-               (click)="selectedHero = hero"
-               (onHeroVotesChanged)="orderHeroes()">
-    </hero-tile>
-  </div>
+    <div class="col-md-12">
+        <h2>Podium of Heroes</h2>
+    </div>
 </div>
-
+<loading *ngIf="!heroes"></loading>
 <div class="row">
+    <hero-tile *ngFor="let hero of heroesTop; let first=first; let last=last;" [hero]="hero" [last]="last" [first]="first" (heroUpdate)="orderHeroes()" [allowVotes]="allowVotes" (click)="currentHero = hero; showModal = true;">
+    </hero-tile>
+</div>
+<div class="form-group">
     <div class="checkbox">
-      <label>
-        <input type="checkbox" [(ngModel)]="allowVotes">
-        Allow votes?
-      </label>
+        <label>
+            <input type="checkbox" [(ngModel)]="allowVotes"> Allow Voting
+        </label>
     </div>
 </div>
 
-<hero-details-popup [hero]="selectedHero"></hero-details-popup>
+<hero-details-popup *ngIf="showModal" [hero]="currentHero" (closeModal)="showModal = false">
+</hero-details-popup>

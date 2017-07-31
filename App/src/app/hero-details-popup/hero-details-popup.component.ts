@@ -1,21 +1,24 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Hero } from "app/models/hero";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Hero } from '../models/hero';
 
 @Component({
-    selector: 'hero-details-popup',
-    templateUrl: './hero-details-popup.component.html',
-    styleUrls: ['./hero-details-popup.component.css']
+  selector: 'hero-details-popup',
+  templateUrl: './hero-details-popup.component.html',
+  styleUrls: ['./hero-details-popup.component.css']
 })
 export class HeroDetailsPopupComponent implements OnInit {
     @Input() hero: Hero;
 
-    constructor() { }
+    @Output() closeModal:EventEmitter<Boolean> = new EventEmitter();
 
-    ngOnInit() {
+  constructor() { }
+  
+ 
+  ngOnInit() {
 
-    }
+  }
 
-    close(): void {
-        this.hero = null;
-    }
+  closeHeroModal(): void {
+    this.closeModal.emit(true);
+  }
 }

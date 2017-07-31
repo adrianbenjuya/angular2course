@@ -1,16 +1,22 @@
-<div class="col-md-4">
-	
-	<div [ngClass]="{ thumbnail: true, gold: first, silver: !first && !last, bronze: last}">
-		<h4>{{hero.name}} ({{hero.votes}} <i class="glyphicon glyphicon-thumbs-up"></i>)</h4>
-	</div>
-
-	<div *ngIf="allowVotes" class="votes clearfix">
-		<button type="button" class="btn btn-default" [disabled]="hero.votes == 10" (click)="updateVotes($event, 1)">
-  			<span class="glyphicon glyphicon-thumbs-up"></span>
-		</button>
-		<button type="button" class="btn btn-default" [disabled]="!hero.votes" (click)="updateVotes($event, -1)">
-  			<span class="glyphicon glyphicon-thumbs-down"></span>
-		</button>
-	</div>
-
+<div class="col-xs-12 col-sm-4">
+    <div class="hero" [ngClass]="{gold:first, silver:!first && !last, bronze:last, down:hero.voting=='down', up:hero.voting=='up'}">
+        <div class="hero-data row" (click)="showModal = true">
+            <div class="col-xs-3">
+                <span class="fa fa-trophy"></span>
+            </div>
+            <div class="col-xs-9">
+                <span>{{hero.name}}&nbsp;&nbsp;</span><br>
+                <span class="fa fa-thumbs-o-up"></span>
+                <strong>{{hero.votes}}</strong>
+            </div>
+        </div>
+        <div class="buttons row">
+            <button class="col-xs-6 btn btn-primary" (click)="voteHero($event, 'up')" [disabled]="hero.votes == 10 || !allowVotes">
+                    <i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button class="col-xs-6 btn btn-default" (click)="voteHero($event, 'down')" [disabled]="!hero.votes || !allowVotes">
+                    <i class="fa fa-thumbs-o-down"></i>
+            </button>
+        </div>
+    </div>
 </div>
