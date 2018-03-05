@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
 	selector: 'paginator',
 	templateUrl: './paginator.component.html',
-	styleUrls: ['./paginator.component.css']
+	styleUrls: ['./paginator.component.scss']
 })
 export class PaginatorComponent implements OnInit {
 

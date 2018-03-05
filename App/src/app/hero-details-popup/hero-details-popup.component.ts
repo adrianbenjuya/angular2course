@@ -4,7 +4,7 @@ import { Hero } from '../models/hero';
 @Component({
   selector: 'hero-details-popup',
   templateUrl: './hero-details-popup.component.html',
-  styleUrls: ['./hero-details-popup.component.css']
+  styleUrls: ['./hero-details-popup.component.scss']
 })
 export class HeroDetailsPopupComponent implements OnInit {
     @Input() hero: Hero;

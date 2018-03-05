@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/fo
 @Component({
 	selector: 'hero-details-reactive',
 	templateUrl: './hero-details-reactive.component.html',
-	styleUrls: ['./hero-details-reactive.component.css']
+	styleUrls: ['./hero-details-reactive.component.scss']
 })
 export class HeroDetailsReactiveComponent implements OnInit, AfterViewInit {
 

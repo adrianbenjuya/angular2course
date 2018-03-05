@@ -4,7 +4,7 @@ import { Hero } from "app/models/hero";
 @Component({
   selector: 'hero-tile',
   templateUrl: './hero-tile.component.html',
-  styleUrls: ['./hero-tile.component.css']
+  styleUrls: ['./hero-tile.component.scss']
 })
 export class HeroTileComponent implements OnInit {
 
