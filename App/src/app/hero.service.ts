@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/retryWhen';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/delay';
@@ -12,15 +12,15 @@ import { environment } from "environments/environment";
 
 @Injectable()
 export class HeroService {
-    private jsonHeader = new Headers({
-        'Content-Type': 'application/json'
-    });
+    // private jsonHeader = new Headers({
+    //     'Content-Type': 'application/json'
+    // });
 
     public currentPage: number = 1;
     public heroesAmount: number;
     public readonly offset: number = 5;
 
-    constructor(private http: Http) { }
+    constructor(private http: HttpClient) { }
 
     getHeroes(start?: number, orderby?: string, orderdir?: string): Observable<Hero[]> {
         let url: string = environment.api;
@@ -28,11 +28,10 @@ export class HeroService {
             url += `?start=${start}&offset=${this.offset}&orderby=${orderby}&orderdir=${orderdir}`;
         }
         return this.http
-            .get(url)
-            .map(response => {
-                let json = response.json();
-                this.heroesAmount = json.total;
-                return Hero.fromJsonArray(json.data);
+            .get<{ total: number, data: any }>(url)
+            .map(r => {
+                this.heroesAmount = r.total;
+                return Hero.fromJsonArray(r.data);
             })
             .retryWhen((errors: Observable<any>) => errors.delay(2000))
             .catch(this.handleError);
@@ -40,7 +39,7 @@ export class HeroService {
 
     getHero(id: number): Observable<Hero> {
         return this.http.get(environment.api + 'get/' + id)
-            .map(response => Hero.fromJson(response.json()))
+            .map(response => Hero.fromJson(response))
             //.retryWhen((errors: Observable<any>) => errors.delay(2000))
             .catch(this.handleError);
     }
@@ -57,7 +56,7 @@ export class HeroService {
         let url = environment.api + 'Delete/' + heroId;
 
         return this.http
-            .get(url, { headers: this.jsonHeader })
+            .get(url)
             .catch(this.handleError);
     }
 
@@ -65,8 +64,8 @@ export class HeroService {
     private post(hero: Hero): Observable<Hero> {
 
         return this.http
-            .post(environment.api, JSON.stringify(hero), { headers: this.jsonHeader })
-            .map((r: Response) => Hero.fromJson(r))
+            .post(environment.api, hero)
+            .map(r => Hero.fromJson(r))
             .catch(this.handleError);
     }
 
@@ -76,8 +75,8 @@ export class HeroService {
         let url = environment.api + 'Edit/' + hero.id;
 
         return this.http
-            .post(url, JSON.stringify(hero), { headers: this.jsonHeader })
-            .map((r: Response) => Hero.fromJson(r))
+            .post(url, hero)
+            .map(r => Hero.fromJson(r))
             .catch(this.handleError);
     }
 

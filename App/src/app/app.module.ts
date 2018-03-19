@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeroService } from './hero.service';
 
-import { ConfirmOptions, Position } from 'angular2-bootstrap-confirm';
-import { Positioning } from 'angular2-bootstrap-confirm/position';
-import { ConfirmModule } from 'angular2-bootstrap-confirm';
 import { HeroTileComponent } from './hero-tile/hero-tile.component';
 import { DashboardComponent } from "app/dashboard/dashboard.component";
 import { HeroesComponent } from "app/heroes/heroes.component";
@@ -26,8 +23,7 @@ import { PaginatorComponent } from "app/shared/paginator/paginator.component";
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    HttpModule,
-    ConfirmModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -42,9 +38,7 @@ import { PaginatorComponent } from "app/shared/paginator/paginator.component";
     HeroDetailsReactiveComponent
   ],
   providers: [
-    HeroService,
-    ConfirmOptions,
-    { provide: Position, useClass: Positioning }
+    HeroService
   ],
   bootstrap: [AppComponent]
 })
