@@ -6,6 +6,9 @@ import { Hero } from '../models/hero';
 import { HeroService } from '../hero.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
+
 import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
 
 @Component({
@@ -43,21 +46,21 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
 
 		this.route.params
 			.switchMap(
-			(param: Params) => {
-				let id: string = param['id'];
-				if (id && id.length) {
-					this.isCreating = false;
-					return this.heroService.getHero(+id);
-				}
+				(param: Params) => {
+					let id: string = param['id'];
+					if (id && id.length) {
+						this.isCreating = false;
+						return this.heroService.getHero(+id);
+					}
 
-				return Observable.of(new Hero());
-			}
+					return Observable.of(new Hero());
+				}
 			)
 			.subscribe(
-			(hero: Hero) => {
-				this.hero = hero;
-			},
-			(err: any) => this.error = err
+				(hero: Hero) => {
+					this.hero = hero;
+				},
+				(err: any) => this.error = err
 			);
 	}
 
@@ -80,8 +83,8 @@ export class HeroDetailComponent implements OnInit, AfterViewInit {
 		this.heroService.save(this.hero)
 			.finally(() => this.saveLoading = false)
 			.subscribe(
-			() => this.location.back(),
-			(err: any) => this.error = err
+				() => this.location.back(),
+				(err: any) => this.error = err
 			)
 	}
 

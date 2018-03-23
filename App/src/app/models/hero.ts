@@ -2,16 +2,16 @@ export class Hero {
     id: number;
     name: string;
     image: string;
-    votes: number = 0;
+    votes = 0;
     description: string;
-    alreadyVoted: boolean = false;
+    alreadyVoted = false;
     birthdate: Date;
-    voting: String = "";
+    voting: String = '';
 
     public static fromJsonArray(json: any): Hero[] {
-        let heroes: Hero[] = new Array<Hero>();
-        for (let item of json) {
-          let hero: Hero = new Hero();
+        const heroes: Hero[] = new Array<Hero>();
+        for (const item of json) {
+          const hero: Hero = new Hero();
           hero.id = item.Id;
           hero.name = item.Name;
           hero.description = item.Description;
@@ -25,7 +25,7 @@ export class Hero {
     }
 
     public static fromJson(json: any): Hero {
-      let heroes = [ json ];
+      const heroes = [ json ];
       return Hero.fromJsonArray(heroes)[0];
     }
 }

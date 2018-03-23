@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 //import 'rxjs/add/operator/throw';
 
 import { Hero } from './models/hero';
-import { environment } from "environments/environment";
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class HeroService {
@@ -16,7 +16,7 @@ export class HeroService {
     //     'Content-Type': 'application/json'
     // });
 
-    public currentPage: number = 1;
+    public currentPage = 1;
     public heroesAmount: number;
     public readonly offset: number = 5;
 
@@ -53,7 +53,7 @@ export class HeroService {
 
     delete(heroId: number): Observable<Response> {
 
-        let url = environment.api + 'Delete/' + heroId;
+        const url = environment.api + 'Delete/' + heroId;
 
         return this.http
             .get(url)
@@ -72,7 +72,7 @@ export class HeroService {
     // Update existing Hero
     private put(hero: Hero): Observable<Hero> {
 
-        let url = environment.api + 'Edit/' + hero.id;
+        const url = environment.api + 'Edit/' + hero.id;
 
         return this.http
             .post(url, hero)
@@ -83,7 +83,7 @@ export class HeroService {
     vote(hero: Hero): Observable<any> {
         hero.votes++;
         hero.alreadyVoted = true;
-        let url: string = environment.api + 'vote/' + hero.id;
+        const url: string = environment.api + 'vote/' + hero.id;
         return this.http.get(url).catch(this.handleError);
     }
 

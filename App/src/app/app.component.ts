@@ -8,7 +8,7 @@ import './rxjs-operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title: string = 'Tour of heroes';
+  title = 'Tour of heroes';
 
   ngOnInit(): void {
   }
