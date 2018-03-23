@@ -11,33 +11,33 @@
 						<div *ngIf="!isCreating" class="form-group">
 							<label class="control-label col-md-2" for="id">ID:</label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="id" formControlName="id" />
+								<input type="text" class="form-control" id="id" formControlName="id">
 							</div>
 						</div>
-						<div class="form-group" [ngClass]="{'has-error': nameMsg}">
+						<div class="form-group">
 							<label class="control-label col-md-2" for="name">Name: *</label>
 							<div class="col-md-10">
-								<input #heroNameInput type="text" class="form-control" id="name" placeholder="Name" formControlName="name" />
-								<span class="help-block" *ngIf="nameMsg">{{nameMsg}}</span>
+								<input #heroNameInput type="text" class="form-control" id="name" placeholder="Name" formControlName="name" [class.is-invalid]="nameMsg">
+								<div class="invalid-feedback">{{nameMsg}}</div>
 							</div>
 						</div>
-						<div class="form-group" [ngClass]="{'has-error': descriptionMsg}">
+						<div class="form-group">
 							<label class="control-label col-md-2" for="description">Description:</label>
 							<div class="col-md-10">
-								<textarea class="form-control" id="description" placeholder="Description" formControlName="description"></textarea>
-								<span class="help-block" *ngIf="descriptionMsg">{{descriptionMsg}}</span>
+								<textarea class="form-control" id="description" placeholder="Description" formControlName="description" [class.is-invalid]="descriptionMsg"></textarea>
+								<div class="invalid-feedback">{{descriptionMsg}}</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="text-center">
-							<img class="thumbnail img-responsive" src="{{heroForm.get('image').value}}" (error)="$event.target.src = './assets/no_hero_img.jpg'">
-						</div>
 						<div class="form-group">
 							<label class="control-label col-md-2" for="image">Image:</label>
 							<div class="input-group col-md-10">
 								<input type="text" class="form-control" id="image" placeholder="Image URL" formControlName="image" />
 							</div>
+						</div>
+						<div class="text-center">
+							<img class="thumbnail img-responsive" src="{{heroForm.get('image').value}}" (error)="$event.target.src = './assets/no_hero_img.jpg'">
 						</div>
 						<div class="text-right">
 							<button type="button" class="btn btn-secondary" (click)="goBack()">Back</button>
