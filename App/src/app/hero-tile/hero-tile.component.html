@@ -1,22 +1,22 @@
-<div class="col-xs-12 col-sm-4">
+<!-- <div class="col-4"> -->
     <div class="hero" [ngClass]="{gold:first, silver:!first && !last, bronze:last, down:hero.voting=='down', up:hero.voting=='up'}">
         <div class="hero-data row" (click)="showModal = true">
-            <div class="col-xs-3">
+            <div class="col-3">
                 <span class="fa fa-trophy"></span>
             </div>
-            <div class="col-xs-9">
+            <div class="col-9">
                 <span>{{hero.name}}&nbsp;&nbsp;</span><br>
                 <span class="fa fa-thumbs-o-up"></span>
                 <strong>{{hero.votes}}</strong>
             </div>
         </div>
         <div class="buttons row">
-            <button class="col-xs-6 btn btn-primary" (click)="voteHero($event, 'up')" [disabled]="hero.votes == 10 || !allowVotes">
+            <button class="col btn btn-primary" (click)="voteHero($event, 'up')" [disabled]="hero.votes == 10 || !allowVotes">
                     <i class="fa fa-thumbs-o-up"></i>
             </button>
-            <button class="col-xs-6 btn btn-default" (click)="voteHero($event, 'down')" [disabled]="!hero.votes || !allowVotes">
+            <button class="col btn btn-default" (click)="voteHero($event, 'down')" [disabled]="!hero.votes || !allowVotes">
                     <i class="fa fa-thumbs-o-down"></i>
             </button>
         </div>
     </div>
-</div>
+<!-- </div> -->

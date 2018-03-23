@@ -1,13 +1,19 @@
-<div *ngIf="_pageCount > 1" class="row">
-    <div class="col-md-12 text-center">
-        <ul class="pagination">
-            <li><a (click)="changePage(1)">&laquo;</a></li>
-            <li><a (click)="changePage(_currPage - 1)">&#10094;</a></li>
-            <li *ngFor="let page of pageList" [class.active]="_currPage == page">
-                <a id="changePage{{page}}" (click)="changePage(page)">{{page}}</a>
-            </li>
-            <li><a (click)="changePage(_currPage + 1)">&#10095;</a></li>
-            <li><a (click)="changePage(_pageCount)">&raquo;</a></li>
-        </ul>
-    </div>
-</div>
+<nav *ngIf="_pageCount > 1">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a (click)="changePage(1)" class="page-link">&laquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)="changePage(_currPage - 1)">&#10094;</a>
+        </li>
+        <li *ngFor="let page of pageList" [class.active]="_currPage == page"  class="page-item">
+            <a class="page-link" id="changePage{{page}}" (click)="changePage(page)">{{page}}</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)="changePage(_currPage + 1)">&#10095;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" (click)="changePage(_pageCount)">&raquo;</a>
+        </li>
+    </ul>
+</nav>

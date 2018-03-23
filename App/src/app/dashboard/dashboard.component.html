@@ -5,10 +5,10 @@
 </div>
 <loading *ngIf="!heroes"></loading>
 <div class="row">
-    <hero-tile *ngFor="let hero of heroesTop; let first=first; let last=last;" [hero]="hero" [last]="last" [first]="first" (heroUpdate)="orderHeroes()" [allowVotes]="allowVotes" (click)="currentHero = hero; showModal = true;">
+    <hero-tile *ngFor="let hero of heroesTop; let first=first; let last=last;" class="col" [hero]="hero" [last]="last" [first]="first" (onHeroVotesChanged)="orderHeroes()" [allowVotes]="allowVotes" (click)="currentHero = hero; showModal = true;">
     </hero-tile>
 </div>
-<div class="form-group">
+<div *ngIf="heroes" class="form-group">
     <div class="checkbox">
         <label>
             <input type="checkbox" [(ngModel)]="allowVotes"> Allow Voting

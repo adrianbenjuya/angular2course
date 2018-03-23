@@ -41,6 +41,10 @@ export class HeroDetailsReactiveComponent implements OnInit, AfterViewInit {
 		private fb: FormBuilder) {
 	}
 
+	goBack(): void {
+		this.location.back();
+	}
+
 	ngOnInit(): void {
 
 		this.route.params
