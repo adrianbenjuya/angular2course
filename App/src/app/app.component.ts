@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from "environments/environment";
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'my-app',
@@ -7,7 +7,7 @@ import { environment } from "environments/environment";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title: string = 'Tour of heroes';
+  title = 'Tour of heroes';
 
   ngOnInit(): void {
   }

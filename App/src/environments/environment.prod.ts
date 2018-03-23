@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://appserverclon.cloudapp.net/TourOfHeroes/api/heroes/'
+  api: 'https://acntourofheroes.azurewebsites.net/api/heroes/'
 };
