@@ -15,8 +15,6 @@ export class HeroTileComponent implements OnInit {
 
   @Output() onHeroVotesChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  showModal: boolean = false;
-
   constructor() { }
 
   ngOnInit() {

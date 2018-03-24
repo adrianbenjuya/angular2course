@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     heroesTop: Hero[];
     currentHero: Hero;
     allowVotes: Boolean = true;
+    showModal = false;
 
     ngOnInit(): void {
         this.heroService.getHeroes().subscribe(
