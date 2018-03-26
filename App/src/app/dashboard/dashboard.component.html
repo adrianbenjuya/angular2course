@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 my-3">
         <h2>Podium of Heroes</h2>
     </div>
 </div>
@@ -8,7 +8,7 @@
     <hero-tile *ngFor="let hero of heroesTop; let first=first; let last=last;" class="col" [hero]="hero" [last]="last" [first]="first" (onHeroVotesChanged)="orderHeroes()" [allowVotes]="allowVotes" (click)="currentHero = hero; showModal = true;">
     </hero-tile>
 </div>
-<div *ngIf="heroes" class="form-group">
+<div *ngIf="heroes" class="form-group mt-3">
     <div class="checkbox">
         <label>
             <input type="checkbox" [(ngModel)]="allowVotes"> Allow Voting

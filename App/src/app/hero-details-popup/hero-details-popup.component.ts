@@ -7,6 +7,7 @@ import { Hero } from '../models/hero';
   styleUrls: ['./hero-details-popup.component.scss']
 })
 export class HeroDetailsPopupComponent implements OnInit {
+  loading = true;
   @Input() hero: Hero;
 
   @Output() closeModal: EventEmitter<Boolean> = new EventEmitter();

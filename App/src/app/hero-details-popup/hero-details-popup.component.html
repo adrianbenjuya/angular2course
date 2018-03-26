@@ -8,7 +8,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img class="img-responsive center-block" src="{{hero?.image}}" />
+                <loading *ngIf="loading"></loading>
+                <img class="w-100" src="{{hero?.image}}" (load)="loading = false" (error)="loading = false">
                 <p>{{hero?.description}}</p>
             </div>
             <div class="modal-footer">
